@@ -23,13 +23,45 @@ public class Data {
 
    private String aString = "a String";
    private int aInt = 22;
-   private Integer aInteger = new Integer(11);
+   private Integer aInteger = 11;
    private Date aDate = new Date();
 
    @Override
    public String toString() {
-      return "Data [aString=" + aString + ", aInt=" + aInt + ", aInteger="
-            + aInteger + ", aDate=" + aDate + "]";
+      return "Data [aString=" + getaString() + ", aInt=" + getaInt() + ", aInteger="
+            + getaInteger() + ", aDate=" + getaDate() + "]";
    }
+
+    public String getaString() {
+        return aString;
+    }
+
+    public void setaString(String aString) {
+        this.aString = aString;
+    }
+
+    public int getaInt() {
+        return aInt;
+    }
+
+    public void setaInt(int aInt) {
+        this.aInt = aInt;
+    }
+
+    public Integer getaInteger() {
+        return aInteger;
+    }
+
+    public void setaInteger(Integer aInteger) {
+        this.aInteger = aInteger;
+    }
+
+    public Date getaDate() {
+        return aDate;
+    }
+
+    public void setaDate(Date aDate) {
+        this.aDate = aDate;
+    }
 
 }
