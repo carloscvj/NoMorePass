@@ -10,8 +10,8 @@ package com.nomorepass.nomorepass;
  * @author becario
  */
 public class NoMorePass {
-    
+
     public String getQrText(String site) {
-        return "";
+        return "Este es el sitio que me dices:" + site;
     }
 }

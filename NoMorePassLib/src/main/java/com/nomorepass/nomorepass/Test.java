@@ -11,6 +11,8 @@ package com.nomorepass.nomorepass;
  */
 public class Test {
     public static void main(String args[]) {
-        System.out.println("hola");
+        NoMorePass nmp = new NoMorePass();
+        String res=nmp.getQrText("Sitio Web");
+        System.out.println(res);
     }
 }
