@@ -11,7 +11,23 @@ package com.nomorepass.nomorepass;
  */
 public class NoMorePass {
 
+    private String nmp_newtoken() {
+        int length = 12;
+        String charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        String retVal = "";
+        for (int i = 0, n = charset.length(); i < length; ++i) {
+            retVal += charset.charAt((int) Math.floor(Math.random() * n));
+        }
+        return retVal;
+    }
+
+    private String recuperaTicket() {
+        return "...no sé...";
+    }
+
     public String getQrText(String site) {
-        return "Este es el sitio que me dices:" + site;
+        String tk = nmp_newtoken();
+        String ticket = recuperaTicket();
+        return "nomorepass://" + tk + ticket + site;
     }
 }

@@ -10,9 +10,10 @@ package com.nomorepass.nomorepass;
  * @author becario
  */
 public class Test {
+
     public static void main(String args[]) {
         NoMorePass nmp = new NoMorePass();
-        String res=nmp.getQrText("Sitio Web");
+        String res = nmp.getQrText("Sitio Web");
         System.out.println(res);
     }
 }
