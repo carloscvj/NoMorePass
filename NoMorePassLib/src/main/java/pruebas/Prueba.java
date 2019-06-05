@@ -8,7 +8,9 @@ package pruebas;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import java.util.Date;
 import java.util.LinkedList;
@@ -69,5 +71,18 @@ public class Prueba {
         json = array.toString();
         System.out.println(json);
 
+        JsonParser parser = new JsonParser();
+        boolean value = false;
+        JsonElement elementPimitive = parser.parse("true");
+        if (elementPimitive.isJsonPrimitive()) {
+            if (elementPimitive.getAsJsonPrimitive().isBoolean()) {
+                value = elementPimitive.getAsBoolean();
+            }
+        }
+        System.out.println(value);
+
+        JsonElement elementObject = parser.parse("{'name':'Juan','age':22,'birthday':'Wed Feb 26 20:39:53 CET 2014'}");
+        String name = elementObject.getAsJsonObject().get("name").getAsString();
+        System.out.println(name);
     }
 }

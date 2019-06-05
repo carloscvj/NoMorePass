@@ -5,6 +5,9 @@
  */
 package com.nomorepass.nomorepass;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
 /**
  *
  * @author becario
@@ -21,13 +24,21 @@ public class NoMorePass {
         return retVal;
     }
 
-    private String recuperaTicket() {
-        return "...no sé...";
+    private String recuperaTicket(String json) {
+        JsonParser parser = new JsonParser();
+        JsonElement elementObject = parser.parse(json);
+        String ticket = elementObject.getAsJsonObject().get("ticket").getAsString();
+        return ticket;
+    }
+
+    private String getData() {
+        return "{'resultado':'ok','ticket':'qué coño pongo yo aquí'}";
     }
 
     public String getQrText(String site) {
+        String json = getData();
         String tk = nmp_newtoken();
-        String ticket = recuperaTicket();
+        String ticket = recuperaTicket(json);
         return "nomorepass://" + tk + ticket + site;
     }
 }
