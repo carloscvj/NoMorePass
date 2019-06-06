@@ -6,6 +6,7 @@
 package com.nomorepass.nomorepass;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -128,8 +129,11 @@ public class NoMorePass {
         JsonParser parser = new JsonParser();
         JsonElement elementObject = parser.parse(json);
         String ret = "";
-        if (esto != null) {
-            ret=elementObject.getAsJsonObject().get(esto).getAsString();
+        if (elementObject != null) {
+            JsonObject jo = elementObject.getAsJsonObject();
+            if (jo != null) {
+                ret = jo.get(esto).getAsString();
+            }
         }
         return ret;
     }
