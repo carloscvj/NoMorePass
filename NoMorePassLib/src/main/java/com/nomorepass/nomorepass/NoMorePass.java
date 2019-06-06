@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -30,7 +32,11 @@ import org.apache.http.util.EntityUtils;
 public class NoMorePass {
 
     private boolean stopped;
+    private String token;
     private String ticket;
+    private String user;
+    private String password;
+    private String extra;
 
     private String charlando(String url, String param, String value) throws UnsupportedEncodingException, IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -55,7 +61,10 @@ public class NoMorePass {
             }
 
         };
-        return httpclient.execute(httpPost, responseHandler);
+        System.out.println("\nDIGO: " + httpPost);
+        String responde = httpclient.execute(httpPost, responseHandler);
+        System.out.println("RESPONDE: " + responde + "\n");
+        return responde;
     }
 
     private String nmp_newtoken() {
@@ -72,16 +81,44 @@ public class NoMorePass {
         if (this.stopped) {
             this.init();
         } else {
-            String json = getApiCheck();
-            System.out.println(json);
-            String resultado = recupera("resultado", json);
-            if(resultado.equals("ok")) {
-                String grant = recupera("grant", json);
-                switch(grant) {
-                    case "deny" :break;
-                    case "grant" : break;
-                    case "expired" : break;
-                    default : break;
+            boolean salir = false;
+            while (!salir) {
+                String json = getApiCheck();
+                String resultado = recupera("resultado", json);
+                if (resultado.equals("ok")) {
+                    String grant = recupera("grant", json);
+                    switch (grant) {
+                        case "deny":
+                            salir = true;
+                            break;
+                        case "grant":
+                            this.user = recupera("user", json);
+                            this.password = desencriptar(recupera("password", json), this.token);
+                            this.extra = recupera("extra", json);
+
+                            salir = true;
+                            break;
+                        case "inicial": {
+                            try {
+                                Thread.sleep(3000); //3 Segundos y seguimos
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(NoMorePass.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            break;
+                        }
+
+                        case "expired":
+                            salir = true;
+                            break;
+                        default: {
+                            try {
+                                Thread.sleep(3000); //3 Segundos y seguimos
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(NoMorePass.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        break;
+                    }
                 }
             }
         }
@@ -90,8 +127,15 @@ public class NoMorePass {
     private String recupera(String esto, String json) {
         JsonParser parser = new JsonParser();
         JsonElement elementObject = parser.parse(json);
-        String ret = elementObject.getAsJsonObject().get(esto).getAsString();
+        String ret = "";
+        if (esto != null) {
+            ret=elementObject.getAsJsonObject().get(esto).getAsString();
+        }
         return ret;
+    }
+
+    private String desencriptar(String recupera, String token) {
+        return "encriptado:" + recupera + " en clave:" + token;
     }
 
     private String getApiId() throws IOException {
@@ -102,8 +146,13 @@ public class NoMorePass {
         return charlando("https://www.nomorepass.com/api/check.php", "ticket", this.ticket);
     }
 
+    private String getApiReference(String device) throws IOException {
+        return charlando("https://www.nomorepass.com/api/check.php", "device", device);
+    }
+
     public void init() {
         this.stopped = false;
+        this.token = null;
         this.ticket = null;
     }
 
@@ -111,14 +160,32 @@ public class NoMorePass {
         String json = getApiId();
         String resultado = recupera("resultado", json);
         if (resultado.equals("ok")) {
-            String tk = nmp_newtoken();
+            this.token = nmp_newtoken();
             this.ticket = recupera("ticket", json);
-            return "nomorepass://" + tk + this.ticket + site;
+            return "nomorepass://" + this.token + this.ticket + site;
         }
         return null;
     }
 
     public void start() throws IOException {
         npm_check();
+    }
+
+    public void stop() {
+        this.stopped = true;
+    }
+
+    public String getQrSend(String site, String user, String pass, String extra) throws IOException {
+        if (site == null) {
+            // site is the id device of origin, if null use generic WEBDEVICE
+            site = "WEBDEVICE";
+        }
+        String device = site;
+        String json = getApiReference(device);
+        String resultado = recupera("resultado", json);
+        if (resultado.equals("ok")) {
+        }
+
+        return null;
     }
 }

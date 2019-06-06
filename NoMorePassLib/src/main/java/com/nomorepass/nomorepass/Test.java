@@ -12,12 +12,16 @@ import java.io.IOException;
  * @author becario
  */
 public class Test {
-    
+
     public static void main(String args[]) throws IOException {
         NoMorePass nmp = new NoMorePass();
         nmp.init();
-        String res = nmp.getQrText("Sitio Web");
+        String res = nmp.getQrText("gmail.com");
         System.out.println(res);
         nmp.start();
+        
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+        //res = nmp.getQrSend(null, "yo", "clave", "extras");
+        //System.out.println(res);
     }
 }
