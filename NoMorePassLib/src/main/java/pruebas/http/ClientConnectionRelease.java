@@ -21,13 +21,11 @@ import org.apache.http.impl.client.HttpClients;
 public class ClientConnectionRelease {
 
     public final static void main(String[] args) throws Exception {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        try {
+        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
             HttpGet httpget = new HttpGet("http://httpbin.org/get");
 
             System.out.println("Executing request " + httpget.getRequestLine());
-            CloseableHttpResponse response = httpclient.execute(httpget);
-            try {
+            try (CloseableHttpResponse response = httpclient.execute(httpget)) {
                 System.out.println("----------------------------------------");
                 System.out.println(response.getStatusLine());
 
@@ -37,24 +35,17 @@ public class ClientConnectionRelease {
                 // If the response does not enclose an entity, there is no need
                 // to bother about connection release
                 if (entity != null) {
-                    InputStream inStream = entity.getContent();
-                    try {
+                    try (InputStream inStream = entity.getContent() // Closing the input stream will trigger connection release
+                    ) {
                         inStream.read();
                         // do something useful with the response
                     } catch (IOException ex) {
                         // In case of an IOException the connection will be released
                         // back to the connection manager automatically
                         throw ex;
-                    } finally {
-                        // Closing the input stream will trigger connection release
-                        inStream.close();
                     }
                 }
-            } finally {
-                response.close();
             }
-        } finally {
-            httpclient.close();
         }
     }
 
