@@ -5,13 +5,15 @@
  */
 package com.nomorepass.nomorepass;
 
+import java.io.IOException;
+
 /**
  *
  * @author becario
  */
 public class Test {
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
         NoMorePass nmp = new NoMorePass();
         String res = nmp.getQrText("Sitio Web");
         System.out.println(res);

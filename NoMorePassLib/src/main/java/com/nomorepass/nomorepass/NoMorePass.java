@@ -7,12 +7,53 @@ package com.nomorepass.nomorepass;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
 /**
  *
  * @author becario
  */
 public class NoMorePass {
+
+    private String charlando(String url, String param, String value) throws UnsupportedEncodingException, IOException {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(url);
+        List<NameValuePair> nvps = new ArrayList<>();
+        nvps.add(new BasicNameValuePair(param, value));
+        httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+
+        // Create a custom response handler
+        ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
+
+            @Override
+            public String handleResponse(
+                    final HttpResponse response) throws ClientProtocolException, IOException {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 300) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Unexpected response status: " + status);
+                }
+            }
+
+        };
+        return httpclient.execute(httpPost, responseHandler);
+    }
 
     private String nmp_newtoken() {
         int length = 12;
@@ -24,30 +65,23 @@ public class NoMorePass {
         return retVal;
     }
 
-    private String recuperaTicket(String json) {
+    private String getApiId() throws IOException {
+        return charlando("https://www.nomorepass.com/api/getid.php", "site", "WEBDEVICE");
+    }
+
+    private String recupera(String esto, String json) {
         JsonParser parser = new JsonParser();
         JsonElement elementObject = parser.parse(json);
-        String ret = elementObject.getAsJsonObject().get("ticket").getAsString();
+        String ret = elementObject.getAsJsonObject().get(esto).getAsString();
         return ret;
     }
 
-    private String getData() {
-        return "{'resultado':'ok','ticket':'qué coño pongo yo aquí'}";
-    }
-
-    private String recuperaResultado(String json) {
-        JsonParser parser = new JsonParser();
-        JsonElement elementObject = parser.parse(json);
-        String ret = elementObject.getAsJsonObject().get("resultado").getAsString();
-        return ret;
-    }
-
-    public String getQrText(String site) {
-        String json = getData();
-        String resultado = recuperaResultado(json);
+    public String getQrText(String site) throws IOException {
+        String json = getApiId();
+        String resultado = recupera("resultado", json);
         if (resultado.equals("ok")) {
             String tk = nmp_newtoken();
-            String ticket = recuperaTicket(json);
+            String ticket = recupera("ticket", json);
             return "nomorepass://" + tk + ticket + site;
         }
         return null;
