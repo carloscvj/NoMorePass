@@ -29,6 +29,9 @@ import org.apache.http.util.EntityUtils;
  */
 public class NoMorePass {
 
+    private boolean stopped;
+    private String ticket;
+
     private String charlando(String url, String param, String value) throws UnsupportedEncodingException, IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);
@@ -65,8 +68,23 @@ public class NoMorePass {
         return retVal;
     }
 
-    private String getApiId() throws IOException {
-        return charlando("https://www.nomorepass.com/api/getid.php", "site", "WEBDEVICE");
+    private void npm_check() throws IOException {
+        if (this.stopped) {
+            this.init();
+        } else {
+            String json = getApiCheck();
+            System.out.println(json);
+            String resultado = recupera("resultado", json);
+            if(resultado.equals("ok")) {
+                String grant = recupera("grant", json);
+                switch(grant) {
+                    case "deny" :break;
+                    case "grant" : break;
+                    case "expired" : break;
+                    default : break;
+                }
+            }
+        }
     }
 
     private String recupera(String esto, String json) {
@@ -76,14 +94,31 @@ public class NoMorePass {
         return ret;
     }
 
+    private String getApiId() throws IOException {
+        return charlando("https://www.nomorepass.com/api/getid.php", "site", "WEBDEVICE");
+    }
+
+    private String getApiCheck() throws IOException {
+        return charlando("https://www.nomorepass.com/api/check.php", "ticket", this.ticket);
+    }
+
+    public void init() {
+        this.stopped = false;
+        this.ticket = null;
+    }
+
     public String getQrText(String site) throws IOException {
         String json = getApiId();
         String resultado = recupera("resultado", json);
         if (resultado.equals("ok")) {
             String tk = nmp_newtoken();
-            String ticket = recupera("ticket", json);
-            return "nomorepass://" + tk + ticket + site;
+            this.ticket = recupera("ticket", json);
+            return "nomorepass://" + tk + this.ticket + site;
         }
         return null;
+    }
+
+    public void start() throws IOException {
+        npm_check();
     }
 }
