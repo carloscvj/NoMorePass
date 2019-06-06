@@ -132,7 +132,10 @@ public class NoMorePass {
         if (elementObject != null) {
             JsonObject jo = elementObject.getAsJsonObject();
             if (jo != null) {
-                ret = jo.get(esto).getAsString();
+                JsonElement get = jo.get(esto);
+                if (get != null) {
+                    ret = get.getAsString();
+                }
             }
         }
         return ret;
