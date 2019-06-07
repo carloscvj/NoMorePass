@@ -60,7 +60,7 @@ public class NoMorePass {
             }
 
         };
-        System.out.println("\nDIGO: " + httpPost);
+        System.out.println("\nDIGO: " + httpPost + " " + nvps);
         String responde = httpclient.execute(httpPost, responseHandler);
         System.out.println("RESPONDE: " + responde + "\n");
         return responde;
@@ -134,6 +134,10 @@ public class NoMorePass {
         return ret;
     }
 
+    private String encriptar(String recupera, String token) throws Exception {
+        return OpenSslAes.encrypt(token, recupera);
+    }
+
     private String desencriptar(String recupera, String token) throws Exception {
         return OpenSslAes.decrypt(token, recupera);
     }
@@ -155,8 +159,20 @@ public class NoMorePass {
     private String getApiReference(String device) throws IOException {
         List<NameValuePair> nvps = new ArrayList<>();
         nvps.add(new BasicNameValuePair("device", device));
+        nvps.add(new BasicNameValuePair("fromdevice", device));
 
-        return charlando("https://www.nomorepass.com/api/check.php", nvps);
+        return charlando("https://www.nomorepass.com/api/reference.php", nvps);
+    }
+
+    private String getApiGrant() throws IOException {
+        List<NameValuePair> nvps = new ArrayList<>();
+        nvps.add(new BasicNameValuePair("grant", "grant"));
+        nvps.add(new BasicNameValuePair("ticket", this.ticket));
+        nvps.add(new BasicNameValuePair("user", this.user));
+        nvps.add(new BasicNameValuePair("password", this.password));
+        nvps.add(new BasicNameValuePair("extra", this.extra));
+
+        return charlando("https://www.nomorepass.com/api/grant.php", nvps);
     }
 
     public void init() {
@@ -199,7 +215,7 @@ public class NoMorePass {
         return extra;
     }
 
-    public String getQrSend(String site, String user, String pass, String extra) throws IOException {
+    public String getQrSend(String site, String user, String pass, String extra) throws Exception {
         if (site == null) {
             // site is the id device of origin, if null use generic WEBDEVICE
             site = "WEBDEVICE";
@@ -208,6 +224,17 @@ public class NoMorePass {
         String json = getApiReference(device);
         String resultado = recupera("resultado", json);
         if (resultado.equals("ok")) {
+            String json1 = getApiId(site);
+            String resultado1 = recupera("resultado", json1);
+            if (resultado1.equals("ok")) {
+                this.token = recupera("token", json1);
+                this.ticket = recupera("ticket", json1);
+                this.user = user;
+                this.password = encriptar(pass, this.token);
+                this.extra = extra;
+                String json2 = getApiGrant();
+                return "nomorepass://SENDPASS" + this.token + this.ticket + site;
+            }
         }
 
         return null;

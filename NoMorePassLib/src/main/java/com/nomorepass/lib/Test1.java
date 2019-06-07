@@ -19,6 +19,7 @@ public class Test1 {
         nmp.init();
         String res = nmp.getQrText("gmail.com");
         System.out.println(res);
+        /*
         Thread t = new Thread(() -> {
             try {
                 nmp.start();
@@ -29,12 +30,12 @@ public class Test1 {
         t.start();      
         Thread.sleep(9000); //9 segundos y cortamos;
         nmp.stop();
+        */
         
-        //nmp.start();
+        nmp.start();
+        
         System.out.println("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         System.out.println("user:" + nmp.getUser() + ", password:" + nmp.getPassword() + " extra:" + nmp.getExtra());
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
-        //res = nmp.getQrSend("gmail.com", nmp.getUser(), nmp.getPassword(), nmp.getExtra());
-        //System.out.println(res);
     }
 }
