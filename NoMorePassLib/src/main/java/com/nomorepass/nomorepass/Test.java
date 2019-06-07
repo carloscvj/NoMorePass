@@ -22,7 +22,7 @@ public class Test {
         System.out.println("user:" + nmp.getUser() + ", password:" + nmp.getPassword() + " extra:" + nmp.getExtra());
 
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
-        //res = nmp.getQrSend(null, "yo", "clave", "extras");
+        //res = nmp.getQrSend("gmail.com", nmp.getUser(), nmp.getPassword(), nmp.getExtra());
         //System.out.println(res);
     }
 }

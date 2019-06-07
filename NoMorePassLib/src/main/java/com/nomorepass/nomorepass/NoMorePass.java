@@ -76,7 +76,7 @@ public class NoMorePass {
         return retVal;
     }
 
-    private void npm_check() throws IOException {
+    private void npm_check() throws Exception {
         while (!this.stopped) {
             String json = getApiCheck();
             String resultado = recupera("resultado", json);
@@ -134,8 +134,8 @@ public class NoMorePass {
         return ret;
     }
 
-    private String desencriptar(String recupera, String token) {
-        return AES.decrypt(recupera, token);
+    private String desencriptar(String recupera, String token) throws Exception {
+        return OpenSslAes.decrypt(token, recupera);
     }
 
     private String getApiId(String site) throws IOException {
@@ -179,7 +179,7 @@ public class NoMorePass {
         return null;
     }
 
-    public void start() throws IOException {
+    public void start() throws Exception {
         npm_check();
     }
 
