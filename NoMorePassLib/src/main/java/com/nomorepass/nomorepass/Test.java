@@ -5,15 +5,13 @@
  */
 package com.nomorepass.nomorepass;
 
-import java.io.IOException;
-
 /**
  *
  * @author becario
  */
 public class Test {
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) throws Exception {
         NoMorePass nmp = new NoMorePass();
         nmp.init();
         String res = nmp.getQrText("gmail.com");
