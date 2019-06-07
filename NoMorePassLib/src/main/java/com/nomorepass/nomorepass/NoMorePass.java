@@ -135,7 +135,7 @@ public class NoMorePass {
     }
 
     private String desencriptar(String recupera, String token) {
-        return "encriptado:" + recupera + " en clave:" + token;
+        return AES.decrypt(recupera, token);
     }
 
     private String getApiId(String site) throws IOException {
@@ -198,7 +198,6 @@ public class NoMorePass {
     public String getExtra() {
         return extra;
     }
-
 
     public String getQrSend(String site, String user, String pass, String extra) throws IOException {
         if (site == null) {
