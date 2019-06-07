@@ -39,11 +39,9 @@ public class NoMorePass {
     private String password;
     private String extra;
 
-    private String charlando(String url, String param, String value) throws UnsupportedEncodingException, IOException {
+    private String charlando(String url, List<NameValuePair> nvps) throws UnsupportedEncodingException, IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);
-        List<NameValuePair> nvps = new ArrayList<>();
-        nvps.add(new BasicNameValuePair(param, value));
         httpPost.setEntity(new UrlEncodedFormEntity(nvps));
 
         // Create a custom response handler
@@ -79,47 +77,42 @@ public class NoMorePass {
     }
 
     private void npm_check() throws IOException {
-        if (this.stopped) {
-            this.init();
-        } else {
-            boolean salir = false;
-            while (!salir) {
-                String json = getApiCheck();
-                String resultado = recupera("resultado", json);
-                if (resultado.equals("ok")) {
-                    String grant = recupera("grant", json);
-                    switch (grant) {
-                        case "deny":
-                            salir = true;
-                            break;
-                        case "grant":
-                            this.user = recupera("user", json);
-                            this.password = desencriptar(recupera("password", json), this.token);
-                            this.extra = recupera("extra", json);
+        while (!this.stopped) {
+            String json = getApiCheck();
+            String resultado = recupera("resultado", json);
+            if (resultado.equals("ok")) {
+                String grant = recupera("grant", json);
+                switch (grant) {
+                    case "deny":
+                        this.stopped = true;
+                        break;
+                    case "grant":
+                        this.user = recupera("usuario", json);
+                        this.password = desencriptar(recupera("password", json), this.token);
+                        this.extra = recupera("extra", json);
 
-                            salir = true;
-                            break;
-                        case "inicial": {
-                            try {
-                                Thread.sleep(3000); //3 Segundos y seguimos
-                            } catch (InterruptedException ex) {
-                                Logger.getLogger(NoMorePass.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            break;
-                        }
-
-                        case "expired":
-                            salir = true;
-                            break;
-                        default: {
-                            try {
-                                Thread.sleep(3000); //3 Segundos y seguimos
-                            } catch (InterruptedException ex) {
-                                Logger.getLogger(NoMorePass.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                        this.stopped = true;
+                        break;
+                    case "inicial": {
+                        try {
+                            Thread.sleep(3000); //3 Segundos y seguimos
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(NoMorePass.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         break;
                     }
+
+                    case "expired":
+                        this.stopped = true;
+                        break;
+                    default: {
+                        try {
+                            Thread.sleep(3000); //3 Segundos y seguimos
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(NoMorePass.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    break;
                 }
             }
         }
@@ -145,26 +138,38 @@ public class NoMorePass {
         return "encriptado:" + recupera + " en clave:" + token;
     }
 
-    private String getApiId() throws IOException {
-        return charlando("https://www.nomorepass.com/api/getid.php", "site", "WEBDEVICE");
+    private String getApiId(String site) throws IOException {
+        List<NameValuePair> nvps = new ArrayList<>();
+        nvps.add(new BasicNameValuePair("site", site));
+
+        return charlando("https://www.nomorepass.com/api/getid.php", nvps);
     }
 
     private String getApiCheck() throws IOException {
-        return charlando("https://www.nomorepass.com/api/check.php", "ticket", this.ticket);
+        List<NameValuePair> nvps = new ArrayList<>();
+        nvps.add(new BasicNameValuePair("ticket", this.ticket));
+
+        return charlando("https://www.nomorepass.com/api/check.php", nvps);
     }
 
     private String getApiReference(String device) throws IOException {
-        return charlando("https://www.nomorepass.com/api/check.php", "device", device);
+        List<NameValuePair> nvps = new ArrayList<>();
+        nvps.add(new BasicNameValuePair("device", device));
+
+        return charlando("https://www.nomorepass.com/api/check.php", nvps);
     }
 
     public void init() {
         this.stopped = false;
         this.token = null;
         this.ticket = null;
+        this.user = null;
+        this.password = null;
+        this.extra = null;
     }
 
     public String getQrText(String site) throws IOException {
-        String json = getApiId();
+        String json = getApiId(site);
         String resultado = recupera("resultado", json);
         if (resultado.equals("ok")) {
             this.token = nmp_newtoken();
@@ -181,6 +186,19 @@ public class NoMorePass {
     public void stop() {
         this.stopped = true;
     }
+
+    public String getUser() {
+        return user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
 
     public String getQrSend(String site, String user, String pass, String extra) throws IOException {
         if (site == null) {

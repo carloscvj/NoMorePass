@@ -19,7 +19,8 @@ public class Test {
         String res = nmp.getQrText("gmail.com");
         System.out.println(res);
         nmp.start();
-        
+        System.out.println("user:" + nmp.getUser() + ", password:" + nmp.getPassword() + " extra:" + nmp.getExtra());
+
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
         //res = nmp.getQrSend(null, "yo", "clave", "extras");
         //System.out.println(res);
