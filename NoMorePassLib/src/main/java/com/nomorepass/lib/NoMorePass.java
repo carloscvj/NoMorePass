@@ -164,6 +164,14 @@ public class NoMorePass {
         return charlando("https://www.nomorepass.com/api/reference.php", nvps);
     }
 
+    private String getApiPing() throws IOException {
+        List<NameValuePair> nvps = new ArrayList<>();
+        nvps.add(new BasicNameValuePair("device", "WEBDEVICE"));
+        nvps.add(new BasicNameValuePair("ticket", this.ticket));
+
+        return charlando("https://www.nomorepass.com/api/ping.php", nvps);
+    }
+
     private String getApiGrant() throws IOException {
         List<NameValuePair> nvps = new ArrayList<>();
         nvps.add(new BasicNameValuePair("grant", "grant"));
@@ -238,5 +246,25 @@ public class NoMorePass {
         }
 
         return null;
+    }
+
+    public void ping() throws Exception {
+        while (!this.stopped) {
+            String json = getApiPing();
+            String resultado = recupera("resultado", json);
+            String ping = recupera("ping", json);
+            if (resultado.equals("ok") && ping.equals("ok")) {
+                try {
+                    Thread.sleep(3000); //3 Segundos y seguimos
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(NoMorePass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                System.out.println("\n********************************************");
+                System.out.println("El dispositivo YA lo ha recogido");
+                System.out.println("********************************************\n");
+                break;
+            }
+        }
     }
 }
