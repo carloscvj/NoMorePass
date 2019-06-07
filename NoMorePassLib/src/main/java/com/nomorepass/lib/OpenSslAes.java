@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nomorepass.nomorepass;
+package com.nomorepass.lib;
 
 import groovy.transform.CompileStatic;
 import java.net.URLEncoder;

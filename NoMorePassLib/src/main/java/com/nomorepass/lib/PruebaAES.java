@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nomorepass.nomorepass;
+package com.nomorepass.lib;
 
 /**
  *
  * @author becario
  */
-public class Prueba {
+public class PruebaAES {
 
     public static void main(String[] args) throws Exception {
         final String secretKey = "ssshhhhhhhhhhh!!!!";
