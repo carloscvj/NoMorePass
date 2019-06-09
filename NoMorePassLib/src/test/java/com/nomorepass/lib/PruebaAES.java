@@ -5,6 +5,8 @@
  */
 package com.nomorepass.lib;
 
+import com.nomorepass.lib.OpenSslAes;
+
 /**
  *
  * @author becario

@@ -5,6 +5,7 @@
  */
 package com.nomorepass.lib;
 
+import com.nomorepass.lib.NoMorePass;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,30 +13,28 @@ import java.util.logging.Logger;
  *
  * @author becario
  */
-public class Test1 {
+public class Test2 {
 
     public static void main(String args[]) throws Exception {
         NoMorePass nmp = new NoMorePass();
         nmp.init();
-        String res = nmp.getQrText("gmail.com");
-        System.out.println(res);
+        String res = nmp.getQrSend(null, "carloscvj", "tiroriro", "{\"type\":\"pwd\"}");
         
+        System.out.println("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(res);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+
         Thread t = new Thread(() -> {
             try {
-                nmp.start();
+                nmp.ping();
             } catch (Exception ex) {
                 Logger.getLogger(Test1.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         t.start();      
-        Thread.sleep(9000); //9 segundos y cortamos;
-        nmp.stop();
+        Thread.sleep(60000); //1 minuto y cortamos
+        nmp.stop();        
+        //nmp.ping();
         
-        
-        //nmp.start();
-        
-        System.out.println("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println("user:" + nmp.getUser() + ", password:" + nmp.getPassword() + " extra:" + nmp.getExtra());
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     }
 }
