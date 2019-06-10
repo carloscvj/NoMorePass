@@ -94,15 +94,20 @@ public class NoMorePassFrame extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${bean.qrText}"), jTextField2, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
+        imagenPanel1.setPreferredSize(new java.awt.Dimension(350, 350));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${bean.image}"), imagenPanel1, org.jdesktop.beansbinding.BeanProperty.create("image"));
+        bindingGroup.addBinding(binding);
+
         javax.swing.GroupLayout imagenPanel1Layout = new javax.swing.GroupLayout(imagenPanel1);
         imagenPanel1.setLayout(imagenPanel1Layout);
         imagenPanel1Layout.setHorizontalGroup(
             imagenPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 350, Short.MAX_VALUE)
         );
         imagenPanel1Layout.setVerticalGroup(
             imagenPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 350, Short.MAX_VALUE)
         );
 
         jPanel6.add(imagenPanel1);
