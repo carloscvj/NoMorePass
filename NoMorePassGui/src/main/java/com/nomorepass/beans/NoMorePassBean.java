@@ -11,4 +11,14 @@ package com.nomorepass.beans;
  */
 public class NoMorePassBean {
     
+    private String sitioWeb;
+
+    public String getSitioWeb() {
+        return sitioWeb;
+    }
+
+    public void setSitioWeb(String sitioWeb) {
+        this.sitioWeb = sitioWeb;
+    }
+    
 }
