@@ -5,7 +5,6 @@
  */
 package com.nomorepass.lib;
 
-import com.nomorepass.lib.NoMorePass;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
