@@ -14,8 +14,8 @@ import com.nomorepass.beans.NoMorePassBean;
 public class Main {
 
     public static void main(String args[]) throws Exception {
-        NoMorePassFrame nmpf= new NoMorePassFrame();
-        NoMorePassBean nmpb=new NoMorePassBean();
+        NoMorePassFrame nmpf = new NoMorePassFrame();
+        NoMorePassBean nmpb = new NoMorePassBean();
         nmpf.setBean(nmpb);
         nmpf.setVisible(true);
     }
