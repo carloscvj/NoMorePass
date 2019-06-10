@@ -76,9 +76,9 @@ public class NoMorePassBean {
         this.image = null;
         this.usuario = null;
         this.password = null;
-        this.extra = null;        
-        setQrText(lib.getQrText(getSitioWeb()));
-        setImage(generateQR(getQrText(), 350, 350));
+        this.extra = null;
+        this.setQrText(lib.getQrText(getSitioWeb()));
+        this.setImage(this.generateQR(getQrText(), 350, 350));
     }
 
     public String getQrText() {
@@ -134,6 +134,17 @@ public class NoMorePassBean {
         this.setExtra(lib.getExtra());
         this.image = null;
 
+    }
+
+    public void enviar() throws Exception {
+        lib.init();
+        this.setSitioWeb(null); //Quitar esto cuando funcione.
+        this.setQrText(lib.getQrSend(this.getSitioWeb(), this.getUsuario(), this.getPassword(), "{\"type\":\"pwd\"}"));
+        this.setImage(this.generateQR(this.getQrText(), 350, 350));
+    }
+
+    public void ping() throws Exception {
+        lib.ping();
     }
 
 }
