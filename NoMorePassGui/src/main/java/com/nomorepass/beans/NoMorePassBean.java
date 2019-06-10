@@ -12,10 +12,15 @@ import com.nomorepass.lib.NoMorePass;
  * @author becario
  */
 public class NoMorePassBean {
-    
+
     private final NoMorePass lib = new NoMorePass();
     private String sitioWeb;
     private String qrText;
+
+    private void limpia() {
+        this.sitioWeb = null;
+        this.qrText = null;
+    }
 
     public String getSitioWeb() {
         return sitioWeb;
@@ -37,5 +42,11 @@ public class NoMorePassBean {
     public void setQrText(String qrText) {
         this.qrText = qrText;
     }
-    
+
+    public void stop() {
+        lib.stop();
+        lib.init();
+        this.limpia();
+    }
+
 }

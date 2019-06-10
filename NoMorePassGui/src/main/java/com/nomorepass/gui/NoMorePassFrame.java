@@ -82,6 +82,11 @@ public class NoMorePassFrame extends javax.swing.JFrame {
         jPanel4.add(jButton1);
 
         jButton2.setText(bundle.getString("detener")); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButton2);
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${bean.qrText}"), jTextField2, org.jdesktop.beansbinding.BeanProperty.create("text"));
@@ -173,6 +178,11 @@ public class NoMorePassFrame extends javax.swing.JFrame {
             Logger.getLogger(NoMorePassFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        bean.stop();
+        refresh();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
