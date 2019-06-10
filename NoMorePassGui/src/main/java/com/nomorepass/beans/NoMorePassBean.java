@@ -12,6 +12,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,11 +25,17 @@ public class NoMorePassBean {
     private String sitioWeb;
     private String qrText;
     private Image image;
+    private String usuario;
+    private String password;
+    private String extra;
 
     private void limpia() {
         this.sitioWeb = null;
         this.qrText = null;
         this.image = null;
+        this.usuario = null;
+        this.password = null;
+        this.extra = null;
     }
 
     private Image generateQR(String text, int h, int w) throws Exception {
@@ -64,6 +72,11 @@ public class NoMorePassBean {
 
     public void start() throws Exception {
         lib.init();
+        this.qrText = null;
+        this.image = null;
+        this.usuario = null;
+        this.password = null;
+        this.extra = null;        
         setQrText(lib.getQrText(getSitioWeb()));
         setImage(generateQR(getQrText(), 350, 350));
     }
@@ -88,6 +101,39 @@ public class NoMorePassBean {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
+    }
+
+    public void scaneando() throws Exception {
+        lib.start();
+        this.setUsuario(lib.getUser());
+        this.setPassword(lib.getPassword());
+        this.setExtra(lib.getExtra());
+        this.image = null;
+
     }
 
 }

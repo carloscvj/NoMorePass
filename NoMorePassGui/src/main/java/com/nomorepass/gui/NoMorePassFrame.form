@@ -34,8 +34,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" min="-2" pref="576" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,10 +76,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel5" max="32767" attributes="0"/>
+                      <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -165,6 +165,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jTextField2" pref="831" max="32767" attributes="0"/>
                               <Component id="jPanel6" max="32767" attributes="0"/>
+                              <Component id="jPanel7" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -176,8 +177,10 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel6" max="32767" attributes="0"/>
+                          <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jPanel7" min="-2" pref="36" max="-2" attributes="0"/>
+                          <EmptySpace pref="14" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -219,6 +222,36 @@
                     </Container>
                   </SubComponents>
                 </Container>
+                <Container class="javax.swing.JPanel" name="jPanel7">
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                    <Property name="columns" type="int" value="0"/>
+                    <Property name="rows" type="int" value="1"/>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JTextField" name="jTextField3">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="Form" sourcePath="${bean.usuario}" target="jTextField3" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="jTextField4">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="Form" sourcePath="${bean.password}" target="jTextField4" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="jTextField5">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="Form" sourcePath="${bean.extra}" target="jTextField5" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
+                    </Component>
+                  </SubComponents>
+                </Container>
               </SubComponents>
             </Container>
           </SubComponents>
@@ -242,7 +275,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="627" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="551" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
