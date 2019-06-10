@@ -5,13 +5,17 @@
  */
 package com.nomorepass.beans;
 
+import com.nomorepass.lib.NoMorePass;
+
 /**
  *
  * @author becario
  */
 public class NoMorePassBean {
     
+    private final NoMorePass lib = new NoMorePass();
     private String sitioWeb;
+    private String qrText;
 
     public String getSitioWeb() {
         return sitioWeb;
@@ -19,6 +23,19 @@ public class NoMorePassBean {
 
     public void setSitioWeb(String sitioWeb) {
         this.sitioWeb = sitioWeb;
+    }
+
+    public void start() throws Exception {
+        lib.init();
+        setQrText(lib.getQrText(getSitioWeb()));
+    }
+
+    public String getQrText() {
+        return qrText;
+    }
+
+    public void setQrText(String qrText) {
+        this.qrText = qrText;
     }
     
 }
