@@ -17,6 +17,6 @@
     <modules>
         <module>NoMorePassLib</module>
         <module>NoMorePassGui</module>
-        <module>nomorepass-dkt</module>
+        <module>nomorepass</module>
     </modules>
 </project>
