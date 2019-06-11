@@ -228,7 +228,7 @@ public class NoMorePass {
             // site is the id device of origin, if null use generic WEBDEVICE
             site = "WEBDEVICE";
         }
-        String device = site;
+        String device = "WEBDEVICE";
         String json = getApiReference(device);
         String resultado = recupera("resultado", json);
         if (resultado.equals("ok")) {

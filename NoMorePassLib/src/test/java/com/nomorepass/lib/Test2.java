@@ -17,7 +17,7 @@ public class Test2 {
     public static void main(String args[]) throws Exception {
         NoMorePass nmp = new NoMorePass();
         nmp.init();
-        String res = nmp.getQrSend(null, "carloscvj", "tiroriro", "{\"type\":\"pwd\"}");
+        String res = nmp.getQrSend("facebook.com", "carloscvj", "tiroriro", "{\"type\":\"pwd\"}");
         
         System.out.println("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         System.out.println(res);
