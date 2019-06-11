@@ -12,8 +12,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -28,6 +26,8 @@ public class NoMorePassBean {
     private String usuario;
     private String password;
     private String extra;
+    private Boolean iniciable;
+    private Boolean enviable;
 
     private void limpia() {
         this.sitioWeb = null;
@@ -91,7 +91,6 @@ public class NoMorePassBean {
 
     public void stop() {
         lib.stop();
-        lib.init();
         this.limpia();
     }
 
@@ -138,13 +137,31 @@ public class NoMorePassBean {
 
     public void enviar() throws Exception {
         lib.init();
-        this.setSitioWeb(null); //Quitar esto cuando funcione.
+        //this.setSitioWeb(null); //Quitar esto cuando funcione.
         this.setQrText(lib.getQrSend(this.getSitioWeb(), this.getUsuario(), this.getPassword(), "{\"type\":\"pwd\"}"));
         this.setImage(this.generateQR(this.getQrText(), 350, 350));
     }
 
     public void ping() throws Exception {
         lib.ping();
+    }
+
+    public Boolean getIniciable() {
+        this.iniciable = !(sitioWeb == null || sitioWeb.equals(""));
+        return iniciable;
+    }
+
+    public void setIniciable(Boolean iniciable) {
+        this.iniciable = iniciable;
+    }
+
+    public Boolean getEnviable() {
+        enviable = !((usuario==null||usuario.equals(""))&&(password==null||password.equals("")));
+        return enviable;
+    }
+
+    public void setEnviable(Boolean enviable) {
+        this.enviable = enviable;
     }
 
 }
