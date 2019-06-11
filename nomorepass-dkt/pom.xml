@@ -47,4 +47,11 @@
             </plugins>
         </pluginManagement>        
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>NoMorePassGui</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>
