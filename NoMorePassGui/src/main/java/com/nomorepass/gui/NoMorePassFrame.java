@@ -5,6 +5,7 @@
  */
 package com.nomorepass.gui;
 
+import com.nomorepass.beans.IdiomaBean;
 import com.nomorepass.beans.NoMorePassBean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -359,6 +360,9 @@ public class NoMorePassFrame extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${idiomaBean.idioma}"), jComboBox1, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
+        bindingGroup.addBinding(binding);
+
         jLabel7.setText(bundle.getString("idioma")); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -532,6 +536,20 @@ public class NoMorePassFrame extends javax.swing.JFrame {
         NoMorePassBean oldBean = this.bean;
         this.bean = bean;
         firePropertyChange(PROP_BEAN, oldBean, bean);
+    }
+
+    private IdiomaBean idiomaBean;
+
+    public static final String PROP_IDIOMABEAN = "idiomaBean";
+
+    public IdiomaBean getIdiomaBean() {
+        return idiomaBean;
+    }
+
+    public void setIdiomaBean(IdiomaBean idiomaBean) {
+        IdiomaBean oldIdiomaBean = this.idiomaBean;
+        this.idiomaBean = idiomaBean;
+        firePropertyChange(PROP_IDIOMABEAN, oldIdiomaBean, idiomaBean);
     }
 
 }
