@@ -14,11 +14,14 @@ public class IdiomaBean {
     private Idiomas idioma;
 
     public Idiomas getIdioma() {
+        if (idioma == null) {
+            idioma = Idiomas.castellano;
+        }
         return idioma;
     }
 
     public void setIdioma(Idiomas idioma) {
         this.idioma = idioma;
     }
-    
+
 }

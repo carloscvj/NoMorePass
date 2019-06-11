@@ -525,6 +525,7 @@
             </Property>
           </Properties>
           <BindingProperties>
+            <BindingProperty name="elements" source="Form" sourcePath="${idiomaBean.idioma.todos}" target="jComboBox1" targetPath="elements" updateStrategy="0" immediately="false"/>
             <BindingProperty name="selectedItem" source="Form" sourcePath="${idiomaBean.idioma}" target="jComboBox1" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
           </BindingProperties>
           <AuxValues>
