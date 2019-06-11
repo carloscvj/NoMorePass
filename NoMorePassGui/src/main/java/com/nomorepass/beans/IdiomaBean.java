@@ -17,7 +17,7 @@ public class IdiomaBean {
 
     public Idiomas getIdioma() {
         if (idioma == null) {
-            idioma = Idiomas.catalan;
+            idioma = Idiomas.getInicial(Locale.getDefault().getLanguage(), Locale.getDefault().getCountry());
             setIdioma(idioma);
         }
         return idioma;
@@ -25,9 +25,8 @@ public class IdiomaBean {
 
     public void setIdioma(Idiomas idioma) {
         if (idioma != null) {
-            System.out.println(Locale.getDefault());
-            Locale.setDefault(new Locale(idioma.getDialecto(), Locale.getDefault().getCountry()));
-            System.out.println(Locale.getDefault());
+            Locale.setDefault(new Locale(idioma.getDialecto(), idioma.getPais()));
+            System.out.println("Puesto en:"+Locale.getDefault());
         }
         this.idioma = idioma;
     }

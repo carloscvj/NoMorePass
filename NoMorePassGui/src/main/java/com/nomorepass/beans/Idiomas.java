@@ -14,8 +14,24 @@ import java.util.List;
  */
 public enum Idiomas {
 
+    ingles("English", "en", "US"),
     castellano("Castellano", "es", "ES"),
     catalan("Català", "ca", "ES");
+
+    public static Idiomas getInicial(String language, String country) {
+        Idiomas ret = null;
+        int lon = Idiomas.values().length;
+        for (int i = 0; i < lon; i++) {
+            String idi=Idiomas.values()[i].dialecto;
+            String pai=Idiomas.values()[i].pais;
+            if(idi.equals(language)&&pai.equals(country)) {
+                ret=Idiomas.values()[i];
+                break;
+            }
+        }
+        return ret;
+    }
+
     private final String descripcion;
     private final String dialecto;
     private final String pais;

@@ -560,6 +560,7 @@ public class NoMorePassFrame extends javax.swing.JFrame {
     private void refreshIdioma() {
         firePropertyChange(PROP_IDIOMABEAN, null, idiomaBean);
         repaint();
+        rootPane.repaint();
     }
     
     public IdiomaBean getIdiomaBean() {
@@ -569,7 +570,11 @@ public class NoMorePassFrame extends javax.swing.JFrame {
     public void setIdiomaBean(IdiomaBean idiomaBean) {
         IdiomaBean oldIdiomaBean = this.idiomaBean;
         this.idiomaBean = idiomaBean;
-        firePropertyChange(PROP_IDIOMABEAN, oldIdiomaBean, idiomaBean);
+        SwingUtilities.invokeLater(() -> {
+            firePropertyChange(PROP_IDIOMABEAN, oldIdiomaBean, idiomaBean);
+        });
+        
+        //
     }
 
 }
