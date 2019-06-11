@@ -65,7 +65,7 @@ public class ImagenPanel extends javax.swing.JPanel {
 
     public ImageIcon getImagen() {
         if (imagen == null) {
-            imagen = new ImageIcon(getClass().getResource("/com/nomorepass/gui/ImagenPanel.gif"));
+            imagen = new ImageIcon(getClass().getResource("/com/nomorepass/gui/square-icon-558.png"));
         }
         if (this.getScale()) {
             //   imagen = new ImageIcon(imagen.getImage().getScaledInstance(this.getWidth(),this.getHeight(),Image.SCALE_SMOOTH));        
