@@ -10,7 +10,7 @@
     
     <groupId>com.nomorepass</groupId>
     <artifactId>nomorepass-dkt</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <name>3 - nomorepass-dkt - Jar main para la Aplicación de escritorio</name>
     <description>La aplicación de escritorio de NoMorePass.</description>
