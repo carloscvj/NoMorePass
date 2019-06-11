@@ -5,6 +5,8 @@
  */
 package com.nomorepass.beans;
 
+import java.util.Locale;
+
 /**
  *
  * @author becario
@@ -15,12 +17,18 @@ public class IdiomaBean {
 
     public Idiomas getIdioma() {
         if (idioma == null) {
-            idioma = Idiomas.castellano;
+            idioma = Idiomas.catalan;
+            setIdioma(idioma);
         }
         return idioma;
     }
 
     public void setIdioma(Idiomas idioma) {
+        if (idioma != null) {
+            System.out.println(Locale.getDefault());
+            Locale.setDefault(new Locale(idioma.getDialecto(), Locale.getDefault().getCountry()));
+            System.out.println(Locale.getDefault());
+        }
         this.idioma = idioma;
     }
 

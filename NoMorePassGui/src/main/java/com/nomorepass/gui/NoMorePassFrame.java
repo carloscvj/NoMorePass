@@ -366,6 +366,12 @@ public class NoMorePassFrame extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${idiomaBean.idioma}"), jComboBox1, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
 
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         jLabel7.setText(bundle.getString("idioma")); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -487,6 +493,12 @@ public class NoMorePassFrame extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_jTextField7CaretUpdate
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        SwingUtilities.invokeLater(() -> {
+            refreshIdioma();
+        });
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.nomorepass.gui.ImagenPanel imagenPanel1;
@@ -545,6 +557,11 @@ public class NoMorePassFrame extends javax.swing.JFrame {
 
     public static final String PROP_IDIOMABEAN = "idiomaBean";
 
+    private void refreshIdioma() {
+        firePropertyChange(PROP_IDIOMABEAN, null, idiomaBean);
+        repaint();
+    }
+    
     public IdiomaBean getIdiomaBean() {
         return idiomaBean;
     }
