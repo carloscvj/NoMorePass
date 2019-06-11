@@ -11,6 +11,9 @@ import com.nomorepass.lib.NoMorePass;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
 
 /**
@@ -132,7 +135,9 @@ public class NoMorePassBean {
         this.setPassword(lib.getPassword());
         this.setExtra(lib.getExtra());
         this.image = null;
-
+        Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
+        StringSelection ss = new StringSelection(this.getPassword());
+        cb.setContents(ss, ss);
     }
 
     public void enviar() throws Exception {
