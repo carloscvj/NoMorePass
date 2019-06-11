@@ -60,9 +60,9 @@ public class NoMorePass {
             }
 
         };
-        System.out.println("\nDIGO: " + httpPost + " " + nvps);
+        //System.out.println("\nDIGO: " + httpPost + " " + nvps);
         String responde = httpclient.execute(httpPost, responseHandler);
-        System.out.println("RESPONDE: " + responde + "\n");
+        //System.out.println("RESPONDE: " + responde + "\n");
         return responde;
     }
 
@@ -260,9 +260,9 @@ public class NoMorePass {
                     Logger.getLogger(NoMorePass.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                System.out.println("\n********************************************");
-                System.out.println("El dispositivo YA lo ha recogido");
-                System.out.println("********************************************\n");
+                //System.out.println("\n********************************************");
+                //System.out.println("El dispositivo YA lo ha recogido");
+                //System.out.println("********************************************\n");
                 break;
             }
         }
