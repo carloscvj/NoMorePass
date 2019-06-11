@@ -3,11 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.nomorepass</groupId>
-        <artifactId>NoMorePass</artifactId>
+        <groupId>es.cvjpy.maven</groupId>
+        <artifactId>jarmain</artifactId>
         <version>1.0</version>
+        <relativePath>/es</relativePath>
     </parent>
-    
+   
     <groupId>com.nomorepass</groupId>
     <artifactId>nomorepass-dkt</artifactId>
     <packaging>jar</packaging>
@@ -18,37 +19,22 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>2.6</version>                    
-                    <configuration>
-                        <descriptors>
-                            <descriptor>src/main/assembly/todo.xml</descriptor>
-                        </descriptors>
-                        <archive>
-                            <manifest>
-                                <mainClass>com.nomorepass.gui.Main</mainClass>
-                            </manifest>
-                        </archive>                    
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>make-assembly</id> 
-                            <phase>package</phase> 
-                            <goals>
-                                <goal>single</goal>
-                            </goals>
-                        </execution>
-                    </executions>                   
-                </plugin>
-            </plugins>
-        </pluginManagement>        
+   
+    <build>    
+        <plugins>          
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.nomorepass.gui.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
+    
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
