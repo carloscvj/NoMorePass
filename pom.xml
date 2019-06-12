@@ -16,7 +16,6 @@
 
     <modules>
         <module>NoMorePassLib</module>
-        <module>NoMorePassGui</module>
-        <module>nomorepassOld</module>
+        <module>nomorepass</module>
     </modules>
 </project>
