@@ -8,6 +8,7 @@ package com.nomorepass.gui;
 import com.nomorepass.beans.IdiomaBean;
 import com.nomorepass.beans.Idiomas;
 import com.nomorepass.beans.NoMorePassBean;
+import java.awt.Point;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -37,7 +38,7 @@ public class Main {
         return ret;
     }
 
-    public static Properties leerConfiguracion() throws Exception {
+    private static Properties leerConfiguracion() throws Exception {
         Properties misprop = new Properties();
         File ficheroprop = new File(getTotalFileConfiguracion());
         if (ficheroprop.exists()) {
@@ -46,19 +47,28 @@ public class Main {
         } else {
             ResourceBundle bunle = ResourceBundle.getBundle("configuracion");
             if (bunle != null) {
-                for (String cada : bunle.keySet()) {
+                bunle.keySet().forEach((cada) -> {
                     misprop.setProperty(cada, bunle.getString(cada));
-                }
-                //Logger.getLogger(ConfiguracionCBLAbs.class.getName()).log(Level.INFO, "configuracion de " + getBase() + " leidas desde resource:{0}", "configuracion");
+                }); //Logger.getLogger(ConfiguracionCBLAbs.class.getName()).log(Level.INFO, "configuracion de " + getBase() + " leidas desde resource:{0}", "configuracion");
             }
         }
         return misprop;
     }
 
-    public static void guardarConfiguracion(Properties prop) throws Exception {
+    private static void guardarConfiguracion(Properties prop) throws Exception {
         File ficheroprop = new File(getTotalFileConfiguracion());
         FileOutputStream fo = new FileOutputStream(ficheroprop);
         prop.store(fo, ficheroprop.getName());
+    }
+
+    private static void save(NoMorePassFrame frm) throws Exception {
+        Properties prop = leerConfiguracion();
+        prop.setProperty("dialecto", frm.getIdiomaBean().getIdioma().getDialecto());
+        prop.setProperty("pais", frm.getIdiomaBean().getIdioma().getPais());
+        Point location = frm.getLocation();
+        prop.setProperty("x", Integer.toString(location.x));
+        prop.setProperty("y", Integer.toString(location.y));
+        guardarConfiguracion(prop);     
     }
 
     public static void main(String args[]) throws Exception {
@@ -70,18 +80,22 @@ public class Main {
         NoMorePassBean nmpb = new NoMorePassBean();
         nmpf.setBean(nmpb);
         nmpf.setIdiomaBean(ib);
+        String x = prop.getProperty("x","0");
+        String y = prop.getProperty("y","0");
+        nmpf.setLocation(Integer.parseInt(x),Integer.parseInt(y));
         nmpf.setVisible(true);
     }
 
     public static void restart(NoMorePassFrame frm) throws Exception {
-        Properties prop = leerConfiguracion();
-        prop.setProperty("dialecto", frm.getIdiomaBean().getIdioma().getDialecto());
-        prop.setProperty("pais", frm.getIdiomaBean().getIdioma().getPais());
-        guardarConfiguracion(prop);
+        save(frm);
         frm.setVisible(false);
         String[] args = {""};
         Main.main(args);
 
+    }
+
+    public static void fin(NoMorePassFrame frm) throws Exception {
+        save(frm);
     }
 
 }

@@ -69,6 +69,11 @@ public class NoMorePassFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("literales"); // NOI18N
         jLabel1.setText(bundle.getString("sitio_web")); // NOI18N
@@ -507,6 +512,14 @@ public class NoMorePassFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            Main.fin(this);
+        } catch (Exception ex) {
+            Logger.getLogger(NoMorePassFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.nomorepass.gui.ImagenPanel imagenPanel1;
@@ -564,12 +577,6 @@ public class NoMorePassFrame extends javax.swing.JFrame {
     private IdiomaBean idiomaBean;
 
     public static final String PROP_IDIOMABEAN = "idiomaBean";
-
-    private void refreshIdioma() {
-        firePropertyChange(PROP_IDIOMABEAN, null, idiomaBean);
-        repaint();
-        rootPane.repaint();
-    }
 
     public IdiomaBean getIdiomaBean() {
         return idiomaBean;
