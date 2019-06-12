@@ -26,7 +26,6 @@ public class IdiomasBean {
     public void setIdioma(IdiomasEnum idioma) {
         if (idioma != null) {
             Locale.setDefault(new Locale(idioma.getDialecto(), idioma.getPais()));
-            System.out.println("Puesto en:"+Locale.getDefault());
         }
         this.idioma = idioma;
     }
