@@ -17,6 +17,8 @@ import javax.swing.SwingUtilities;
  */
 public class NoMorePassFrame extends javax.swing.JFrame {
 
+    private boolean trabajando;
+
     /**
      * Creates new form NoMorePassFrame
      */
@@ -494,9 +496,17 @@ public class NoMorePassFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField7CaretUpdate
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        SwingUtilities.invokeLater(() -> {
-            refreshIdioma();
-        });
+        if (trabajando) {
+            SwingUtilities.invokeLater(() -> {
+                setVisible(false);
+                String[] args = {""};
+                try {
+                    Main.main(args);
+                } catch (Exception ex) {
+                    Logger.getLogger(NoMorePassFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
@@ -562,7 +572,7 @@ public class NoMorePassFrame extends javax.swing.JFrame {
         repaint();
         rootPane.repaint();
     }
-    
+
     public IdiomaBean getIdiomaBean() {
         return idiomaBean;
     }
@@ -571,9 +581,11 @@ public class NoMorePassFrame extends javax.swing.JFrame {
         IdiomaBean oldIdiomaBean = this.idiomaBean;
         this.idiomaBean = idiomaBean;
         SwingUtilities.invokeLater(() -> {
+            this.trabajando = false;
             firePropertyChange(PROP_IDIOMABEAN, oldIdiomaBean, idiomaBean);
+            this.trabajando = true;
         });
-        
+
         //
     }
 
