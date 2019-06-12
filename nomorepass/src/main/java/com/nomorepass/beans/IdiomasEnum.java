@@ -16,20 +16,21 @@ public enum IdiomasEnum {
 
     castellano("Castellano", "es", "ES"),
     catalan("Català", "ca", "ES"),
+    aleman("Deutsch", "de", "DE"),
     ingles("English", "en", "US"),
-    euskera("Euskara","eu", "ES"),
-    gallego("Galego","gl", "ES"),
-    portugues("Portugues","pt","PT");
-    
-    
+    euskera("Euskara", "eu", "ES"),
+    gallego("Galego", "gl", "ES"),
+    italiano("Italiano","it","IT"),
+    portugues("Portugues", "pt", "PT");
+
     public static IdiomasEnum getInicial(String language, String country) {
         IdiomasEnum ret = null;
         int lon = IdiomasEnum.values().length;
         for (int i = 0; i < lon; i++) {
-            String idi=IdiomasEnum.values()[i].dialecto;
-            String pai=IdiomasEnum.values()[i].pais;
-            if(idi.equals(language)&&pai.equals(country)) {
-                ret=IdiomasEnum.values()[i];
+            String idi = IdiomasEnum.values()[i].dialecto;
+            String pai = IdiomasEnum.values()[i].pais;
+            if (idi.equals(language) && pai.equals(country)) {
+                ret = IdiomasEnum.values()[i];
                 break;
             }
         }
