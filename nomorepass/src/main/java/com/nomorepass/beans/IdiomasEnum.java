@@ -18,7 +18,8 @@ public enum IdiomasEnum {
     catalan("Català", "ca", "ES"),
     ingles("English", "en", "US"),
     euskera("Euskara","eu", "ES"),
-    gallego("Galego","gl", "ES");
+    gallego("Galego","gl", "ES"),
+    portugues("Portugues","pt","PT");
     
     
     public static IdiomasEnum getInicial(String language, String country) {
