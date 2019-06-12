@@ -3,18 +3,41 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.nomorepass</groupId>
-        <artifactId>NoMorePass</artifactId>
-        <version>1.1</version>
+        <groupId>es.cvjpy.maven</groupId>
+        <artifactId>jarmain</artifactId>
+        <version>1.0</version>
+        <relativePath>/es</relativePath>
     </parent>
     
     <groupId>com.nomorepass</groupId>
     <artifactId>NoMorePassGui</artifactId>
+    <version>1.1</version>
     <packaging>jar</packaging>
 
     <name>2 - NoMorePassGui - Librería de interface de escritorio</name>
     <description>Librería de interface de escritorio.</description>
     
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+   
+    <build>    
+        <plugins>          
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.nomorepass.gui.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+   
     <dependencies>
         <dependency>
             <groupId>org.jdesktop</groupId>
@@ -38,9 +61,5 @@
             <version>3.2.1</version>
         </dependency>        
     </dependencies>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
+    
 </project>

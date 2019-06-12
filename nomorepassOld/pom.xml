@@ -10,11 +10,11 @@
     </parent>
    
     <groupId>com.nomorepass</groupId>
-    <artifactId>nomorepass</artifactId>
+    <artifactId>nomorepassOld</artifactId>
     <version>1.1</version>
     <packaging>jar</packaging>
 
-    <name>3 - nomorepass - Jar main para la Aplicación de escritorio</name>
+    <name>3 - nomorepassOld - Jar main para la Aplicación de escritorio</name>
     <description>La aplicación de escritorio de NoMorePass.</description>
         
     <properties>
