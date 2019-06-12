@@ -11,19 +11,19 @@ import java.util.Locale;
  *
  * @author becario
  */
-public class IdiomaBean {
+public class IdiomasBean {
 
-    private Idiomas idioma;
+    private IdiomasEnum idioma;
 
-    public Idiomas getIdioma() {
+    public IdiomasEnum getIdioma() {
         if (idioma == null) {
-            idioma = Idiomas.getInicial(Locale.getDefault().getLanguage(), Locale.getDefault().getCountry());
+            idioma = IdiomasEnum.getInicial(Locale.getDefault().getLanguage(), Locale.getDefault().getCountry());
             setIdioma(idioma);
         }
         return idioma;
     }
 
-    public void setIdioma(Idiomas idioma) {
+    public void setIdioma(IdiomasEnum idioma) {
         if (idioma != null) {
             Locale.setDefault(new Locale(idioma.getDialecto(), idioma.getPais()));
             System.out.println("Puesto en:"+Locale.getDefault());

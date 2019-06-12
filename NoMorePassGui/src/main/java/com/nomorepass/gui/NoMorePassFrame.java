@@ -5,7 +5,7 @@
  */
 package com.nomorepass.gui;
 
-import com.nomorepass.beans.IdiomaBean;
+import com.nomorepass.beans.IdiomasBean;
 import com.nomorepass.beans.NoMorePassBean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -574,16 +574,16 @@ public class NoMorePassFrame extends javax.swing.JFrame {
         firePropertyChange(PROP_BEAN, oldBean, bean);
     }
 
-    private IdiomaBean idiomaBean;
+    private IdiomasBean idiomaBean;
 
     public static final String PROP_IDIOMABEAN = "idiomaBean";
 
-    public IdiomaBean getIdiomaBean() {
+    public IdiomasBean getIdiomaBean() {
         return idiomaBean;
     }
 
-    public void setIdiomaBean(IdiomaBean idiomaBean) {
-        IdiomaBean oldIdiomaBean = this.idiomaBean;
+    public void setIdiomaBean(IdiomasBean idiomaBean) {
+        IdiomasBean oldIdiomaBean = this.idiomaBean;
         this.idiomaBean = idiomaBean;
         SwingUtilities.invokeLater(() -> {
             this.trabajando = false;

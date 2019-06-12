@@ -5,8 +5,8 @@
  */
 package com.nomorepass.gui;
 
-import com.nomorepass.beans.IdiomaBean;
-import com.nomorepass.beans.Idiomas;
+import com.nomorepass.beans.IdiomasBean;
+import com.nomorepass.beans.IdiomasEnum;
 import com.nomorepass.beans.NoMorePassBean;
 import java.awt.Point;
 import java.io.File;
@@ -73,8 +73,8 @@ public class Main {
 
     public static void main(String args[]) throws Exception {
         Properties prop = leerConfiguracion();
-        IdiomaBean ib = new IdiomaBean();
-        ib.setIdioma(Idiomas.getInicial(prop.getProperty("dialecto"), prop.getProperty("pais")));
+        IdiomasBean ib = new IdiomasBean();
+        ib.setIdioma(IdiomasEnum.getInicial(prop.getProperty("dialecto"), prop.getProperty("pais")));
         NoMorePassFrame nmpf = new NoMorePassFrame();
         NoMorePassBean nmpb = new NoMorePassBean();
         nmpf.setBean(nmpb);

@@ -12,20 +12,20 @@ import java.util.List;
  *
  * @author becario
  */
-public enum Idiomas {
+public enum IdiomasEnum {
 
     ingles("English", "en", "US"),
     castellano("Castellano", "es", "ES"),
     catalan("Català", "ca", "ES");
 
-    public static Idiomas getInicial(String language, String country) {
-        Idiomas ret = null;
-        int lon = Idiomas.values().length;
+    public static IdiomasEnum getInicial(String language, String country) {
+        IdiomasEnum ret = null;
+        int lon = IdiomasEnum.values().length;
         for (int i = 0; i < lon; i++) {
-            String idi=Idiomas.values()[i].dialecto;
-            String pai=Idiomas.values()[i].pais;
+            String idi=IdiomasEnum.values()[i].dialecto;
+            String pai=IdiomasEnum.values()[i].pais;
             if(idi.equals(language)&&pai.equals(country)) {
-                ret=Idiomas.values()[i];
+                ret=IdiomasEnum.values()[i];
                 break;
             }
         }
@@ -36,7 +36,7 @@ public enum Idiomas {
     private final String dialecto;
     private final String pais;
 
-    private Idiomas(String descripcion, String dialecto, String pais) {
+    private IdiomasEnum(String descripcion, String dialecto, String pais) {
         this.descripcion = descripcion;
         this.dialecto = dialecto;
         this.pais = pais;
@@ -47,11 +47,11 @@ public enum Idiomas {
         return descripcion;
     }
 
-    public List<Idiomas> getTodos() {
-        List<Idiomas> ret = new ArrayList();
-        int lon = Idiomas.values().length;
+    public List<IdiomasEnum> getTodos() {
+        List<IdiomasEnum> ret = new ArrayList();
+        int lon = IdiomasEnum.values().length;
         for (int i = 0; i < lon; i++) {
-            ret.add(Idiomas.values()[i]);
+            ret.add(IdiomasEnum.values()[i]);
         }
         return ret;
     }
