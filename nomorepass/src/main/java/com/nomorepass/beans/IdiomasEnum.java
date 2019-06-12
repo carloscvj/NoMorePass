@@ -14,10 +14,13 @@ import java.util.List;
  */
 public enum IdiomasEnum {
 
-    ingles("English", "en", "US"),
     castellano("Castellano", "es", "ES"),
-    catalan("Català", "ca", "ES");
-
+    catalan("Català", "ca", "ES"),
+    ingles("English", "en", "US"),
+    euskera("Euskara","eu", "ES"),
+    gallego("Galego","gl", "ES");
+    
+    
     public static IdiomasEnum getInicial(String language, String country) {
         IdiomasEnum ret = null;
         int lon = IdiomasEnum.values().length;
