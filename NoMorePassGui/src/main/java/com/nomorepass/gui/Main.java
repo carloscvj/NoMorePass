@@ -75,7 +75,6 @@ public class Main {
         Properties prop = leerConfiguracion();
         IdiomaBean ib = new IdiomaBean();
         ib.setIdioma(Idiomas.getInicial(prop.getProperty("dialecto"), prop.getProperty("pais")));
-
         NoMorePassFrame nmpf = new NoMorePassFrame();
         NoMorePassBean nmpb = new NoMorePassBean();
         nmpf.setBean(nmpb);
@@ -91,7 +90,6 @@ public class Main {
         frm.setVisible(false);
         String[] args = {""};
         Main.main(args);
-
     }
 
     public static void fin(NoMorePassFrame frm) throws Exception {
