@@ -19,8 +19,9 @@ public enum IdiomasEnum {
     aleman("Deutsch", "de", "DE"),
     ingles("English", "en", "US"),
     euskera("Euskara", "eu", "ES"),
+    frances("Francais", "fr", "FR"),
     gallego("Galego", "gl", "ES"),
-    italiano("Italiano","it","IT"),
+    italiano("Italiano", "it", "IT"),
     portugues("Portugues", "pt", "PT");
 
     public static IdiomasEnum getInicial(String language, String country) {
