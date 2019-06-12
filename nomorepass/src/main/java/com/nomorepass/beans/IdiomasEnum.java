@@ -16,13 +16,16 @@ public enum IdiomasEnum {
 
     castellano("Castellano", "es", "ES"),
     catalan("Català", "ca", "ES"),
+    chino("中國","ch","CH"),
     aleman("Deutsch", "de", "DE"),
     ingles("English", "en", "US"),
     euskera("Euskara", "eu", "ES"),
     frances("Francais", "fr", "FR"),
-    gallego("Galego", "gl", "ES"),
+    gallego("Galego", "gl", "ES"),   
     italiano("Italiano", "it", "IT"),
-    portugues("Portugues", "pt", "PT");
+    japones("日本人の","ja","JA"),
+    portugues("Portugues", "pt", "PT"),
+    ruso("Pусский","ru","RU");
 
     public static IdiomasEnum getInicial(String language, String country) {
         IdiomasEnum ret = null;
