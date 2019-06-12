@@ -39,6 +39,10 @@ public class NoMorePass {
     private String password;
     private String extra;
 
+    private String subiendoUnFile() throws Exception {
+        return null;
+    }
+
     private String charlando(String url, List<NameValuePair> nvps) throws UnsupportedEncodingException, IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);
@@ -60,9 +64,9 @@ public class NoMorePass {
             }
 
         };
-        //System.out.println("\nDIGO: " + httpPost + " " + nvps);
+        System.out.println("\nDIGO: " + httpPost + " " + nvps);
         String responde = httpclient.execute(httpPost, responseHandler);
-        //System.out.println("RESPONDE: " + responde + "\n");
+        System.out.println("RESPONDE: " + responde + "\n");
         return responde;
     }
 
@@ -74,48 +78,6 @@ public class NoMorePass {
             retVal += charset.charAt((int) Math.floor(Math.random() * n));
         }
         return retVal;
-    }
-
-    private void npm_check() throws Exception {
-        while (!this.stopped) {
-            String json = getApiCheck();
-            String resultado = recupera("resultado", json);
-            if (resultado.equals("ok")) {
-                String grant = recupera("grant", json);
-                switch (grant) {
-                    case "deny":
-                        this.stopped = true;
-                        break;
-                    case "grant":
-                        this.user = recupera("usuario", json);
-                        this.password = desencriptar(recupera("password", json), this.token);
-                        this.extra = recupera("extra", json);
-
-                        this.stopped = true;
-                        break;
-                    case "inicial": {
-                        try {
-                            Thread.sleep(3000); //3 Segundos y seguimos
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(NoMorePass.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        break;
-                    }
-
-                    case "expired":
-                        this.stopped = true;
-                        break;
-                    default: {
-                        try {
-                            Thread.sleep(3000); //3 Segundos y seguimos
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(NoMorePass.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    break;
-                }
-            }
-        }
     }
 
     private String recupera(String esto, String json) {
@@ -183,6 +145,14 @@ public class NoMorePass {
         return charlando("https://www.nomorepass.com/api/grant.php", nvps);
     }
 
+    private String getApiSendFile() throws IOException {
+        List<NameValuePair> nvps = new ArrayList<>();
+        nvps.add(new BasicNameValuePair("token", nmp_newtoken()));
+        nvps.add(new BasicNameValuePair("device", "WEBDEVICE"));
+        nvps.add(new BasicNameValuePair("file", "[{'id':'1','sitio':'sitio','usuario':'usuario','password':'password','host':'host'}]"));
+        return charlando("https://nomorepass.com/api/sendfile.php", nvps);
+    }
+
     public void init() {
         this.stopped = false;
         this.token = null;
@@ -204,7 +174,46 @@ public class NoMorePass {
     }
 
     public void start() throws Exception {
-        npm_check();
+        while (!this.stopped) {
+            String json = getApiCheck();
+            String resultado = recupera("resultado", json);
+            if (resultado.equals("ok")) {
+                String grant = recupera("grant", json);
+                switch (grant) {
+                    case "deny":
+                        this.stopped = true;
+                        break;
+                    case "grant":
+                        this.user = recupera("usuario", json);
+                        this.password = desencriptar(recupera("password", json), this.token);
+                        this.extra = recupera("extra", json);
+
+                        this.stopped = true;
+                        break;
+                    case "inicial": {
+                        try {
+                            Thread.sleep(3000); //3 Segundos y seguimos
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(NoMorePass.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        break;
+                    }
+
+                    case "expired":
+                        this.stopped = true;
+                        break;
+                    default: {
+                        try {
+                            Thread.sleep(3000); //3 Segundos y seguimos
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(NoMorePass.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
     }
 
     public void stop() {
@@ -266,5 +275,10 @@ public class NoMorePass {
                 break;
             }
         }
+    }
+
+    public void convertAndSend(String filePath) throws Exception {
+        String json = getApiSendFile();
+        System.out.println(json);
     }
 }
