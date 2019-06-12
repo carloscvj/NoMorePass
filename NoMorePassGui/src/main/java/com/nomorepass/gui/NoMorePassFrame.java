@@ -498,10 +498,8 @@ public class NoMorePassFrame extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         if (trabajando) {
             SwingUtilities.invokeLater(() -> {
-                setVisible(false);
-                String[] args = {""};
                 try {
-                    Main.main(args);
+                    Main.restart(this);
                 } catch (Exception ex) {
                     Logger.getLogger(NoMorePassFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
