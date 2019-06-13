@@ -12,14 +12,12 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 /**
- * Example how to use multipart/form encoded POST request.
+ * Example how to use multipart/form encoded POST request. 
  */
 public class ClientMultipartFormPost {
 
@@ -27,25 +25,21 @@ public class ClientMultipartFormPost {
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
             HttpPost httppost = new HttpPost("https://nomorepass.com/api/sendfile.php");
 
-            FileBody bin = new FileBody(new File("algo.json"));
-            StringBody comment = new StringBody("A binary file of some kind", ContentType.MULTIPART_FORM_DATA);
+            HttpEntity entity = MultipartEntityBuilder
+                .create()
+                .addTextBody("token", "OZg1Hw26P72n")
+                .addTextBody("device", "WEBDEVICE")
+                .addBinaryBody("file", new File("algo.json"), ContentType.create("application/octet-stream"), "algo.json")
+                .build();
+            
+            httppost.setEntity(entity);
 
-            HttpEntity reqEntity = MultipartEntityBuilder.create()
-                    .addPart("bin", bin)
-                    .addPart("comment", comment)
-                    .build();
-
-
-            httppost.setEntity(reqEntity);
-
-            System.out.println("executing request " + httppost);
+            System.out.println(httppost.toString());
+            System.out.println(EntityUtils.toString(httppost.getEntity()));
             try (CloseableHttpResponse response = httpclient.execute(httppost)) {
-                System.out.println("----------------------------------------");
-                System.out.println(response.getStatusLine());
                 HttpEntity resEntity = response.getEntity();
                 if (resEntity != null) {
-                    System.out.println("Response content length: " + resEntity.getContentLength());
-                    System.out.println(resEntity);
+                    System.out.println(EntityUtils.toString(resEntity));
                 }
                 EntityUtils.consume(resEntity);
             }

@@ -52,8 +52,7 @@ public class NoMorePass {
         ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
 
             @Override
-            public String handleResponse(
-                    final HttpResponse response) throws ClientProtocolException, IOException {
+            public String handleResponse(final HttpResponse response) throws ClientProtocolException, IOException {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 300) {
                     HttpEntity entity = response.getEntity();
@@ -64,9 +63,9 @@ public class NoMorePass {
             }
 
         };
-        System.out.println("\nDIGO: " + httpPost + " " + nvps);
+        //System.out.println("\nDIGO: " + httpPost + " " + nvps);
         String responde = httpclient.execute(httpPost, responseHandler);
-        System.out.println("RESPONDE: " + responde + "\n");
+        //System.out.println("RESPONDE: " + responde + "\n");
         return responde;
     }
 
@@ -146,11 +145,7 @@ public class NoMorePass {
     }
 
     private String getApiSendFile() throws IOException {
-        List<NameValuePair> nvps = new ArrayList<>();
-        nvps.add(new BasicNameValuePair("token", nmp_newtoken()));
-        nvps.add(new BasicNameValuePair("device", "WEBDEVICE"));
-        nvps.add(new BasicNameValuePair("file", "[{'id':'1','sitio':'sitio','usuario':'usuario','password':'password','host':'host'}]"));
-        return charlando("https://nomorepass.com/api/sendfile.php", nvps);
+        return nmp_newtoken();
     }
 
     public void init() {
