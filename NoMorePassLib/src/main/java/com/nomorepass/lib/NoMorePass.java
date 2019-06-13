@@ -8,6 +8,7 @@ package com.nomorepass.lib;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -20,7 +21,10 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
@@ -39,8 +43,31 @@ public class NoMorePass {
     private String password;
     private String extra;
 
-    private String subiendoUnFile() throws Exception {
-        return null;
+    private String subiendoUnFile(String url, String fileName) throws Exception {
+        String ret = null;
+        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+            HttpPost httppost = new HttpPost(url);
+
+            HttpEntity entity = MultipartEntityBuilder
+                    .create()
+                    .addTextBody("token", this.token)
+                    .addTextBody("device", "WEBDEVICE")
+                    .addBinaryBody("file", new File(fileName), ContentType.create("application/octet-stream"), fileName)
+                    .build();
+
+            httppost.setEntity(entity);
+
+            System.out.println(httppost.toString());
+            System.out.println(EntityUtils.toString(httppost.getEntity()));
+            try (CloseableHttpResponse response = httpclient.execute(httppost)) {
+                HttpEntity resEntity = response.getEntity();
+                if (resEntity != null) {
+                    ret = EntityUtils.toString(resEntity);
+                }
+                EntityUtils.consume(resEntity);
+            }
+        }
+        return ret;
     }
 
     private String charlando(String url, List<NameValuePair> nvps) throws UnsupportedEncodingException, IOException {
@@ -144,8 +171,9 @@ public class NoMorePass {
         return charlando("https://www.nomorepass.com/api/grant.php", nvps);
     }
 
-    private String getApiSendFile() throws IOException {
-        return nmp_newtoken();
+    private String getApiSendFile(String nameFile) throws Exception {
+        this.token = nmp_newtoken();
+        return subiendoUnFile("https://nomorepass.com/api/sendfile.php", nameFile);
     }
 
     public void init() {
@@ -272,8 +300,16 @@ public class NoMorePass {
         }
     }
 
-    public void convertAndSend(String filePath) throws Exception {
-        String json = getApiSendFile();
+    public String convertAndSend(String fileName) throws Exception {
+        String json = getApiSendFile(fileName);
         System.out.println(json);
+        String resultado = recupera("resultado", json);
+        if (resultado.equals("ok")) {
+            this.token = recupera("token", json);
+            this.ticket = recupera("ticket", json);
+            return "nomorepass://SENDFILE" + this.token + this.ticket;
+        }
+        return null;
+        
     }
 }

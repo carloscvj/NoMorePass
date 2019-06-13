@@ -14,10 +14,10 @@ public class Test3 {
     public static void main(String args[]) throws Exception {
         NoMorePass nmp = new NoMorePass();
         nmp.init();
-        nmp.convertAndSend("algunFichero.csv");
+        String res=nmp.convertAndSend("algo.json");
         
         System.out.println("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println("---------------------------------------------------");
+        System.out.println(res);
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 
         
