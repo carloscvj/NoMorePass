@@ -1,0 +1,31 @@
+[ {
+  "id" : "1",
+  "sitio" : "sitio1",
+  "usuario" : "usuario1",
+  "password" : "password1",
+  "host" : "host1"
+}, {
+  "id" : "2",
+  "sitio" : "sitio2",
+  "usuario" : "usuario2",
+  "password" : "password2",
+  "host" : "host2"
+}, {
+  "id" : "3",
+  "sitio" : "sitio3",
+  "usuario" : "usuario3",
+  "password" : "password3",
+  "host" : "host3"
+}, {
+  "id" : "4",
+  "sitio" : "sitio4",
+  "usuario" : "usuario4",
+  "password" : "password4",
+  "host" : "host4"
+}, {
+  "id" : "5",
+  "sitio" : "sitio5",
+  "usuario" : "usuario5",
+  "password" : "password5",
+  "host" : "host5"
+} ]

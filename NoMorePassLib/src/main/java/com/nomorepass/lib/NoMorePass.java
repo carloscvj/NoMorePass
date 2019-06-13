@@ -5,14 +5,22 @@
  */
 package com.nomorepass.lib;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.http.HttpEntity;
@@ -300,8 +308,31 @@ public class NoMorePass {
         }
     }
 
+    private void csvToJson(String fileName) throws Exception {
+        InputStream in = new FileInputStream(fileName);
+        CSV csv = new CSV(true, ',', in);
+        List<String> fieldNames = null;
+        if (csv.hasNext()) {
+            fieldNames = new ArrayList<>(csv.next());
+        }
+        List<Map<String, String>> list = new ArrayList<>();
+        while (csv.hasNext()) {
+            List< String> x = csv.next();
+            Map< String, String> obj = new LinkedHashMap<>();
+            for (int i = 0; i < fieldNames.size(); i++) {
+                obj.put(fieldNames.get(i), x.get(i));
+            }
+            list.add(obj);
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        OutputStream ou = new FileOutputStream(fileName + ".json");
+        mapper.writeValue(ou, list);
+    }
+
     public String convertAndSend(String fileName) throws Exception {
-        String json = getApiSendFile(fileName);
+        csvToJson(fileName);
+        String json = getApiSendFile(fileName + ".json");
         System.out.println(json);
         String resultado = recupera("resultado", json);
         if (resultado.equals("ok")) {
@@ -310,6 +341,6 @@ public class NoMorePass {
             return "nomorepass://SENDFILE" + this.token + this.ticket;
         }
         return null;
-        
+
     }
 }

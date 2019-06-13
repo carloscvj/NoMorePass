@@ -14,7 +14,7 @@ public class Test3 {
     public static void main(String args[]) throws Exception {
         NoMorePass nmp = new NoMorePass();
         nmp.init();
-        String res=nmp.convertAndSend("algo.json");
+        String res=nmp.convertAndSend("algo.csv");
         
         System.out.println("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         System.out.println(res);
