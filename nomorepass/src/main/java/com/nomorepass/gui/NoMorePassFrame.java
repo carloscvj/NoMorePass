@@ -439,6 +439,9 @@ public class NoMorePassFrame extends javax.swing.JFrame {
 
         imagenPanel3.setPreferredSize(new java.awt.Dimension(350, 350));
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${bean.image}"), imagenPanel3, org.jdesktop.beansbinding.BeanProperty.create("image"));
+        bindingGroup.addBinding(binding);
+
         javax.swing.GroupLayout imagenPanel3Layout = new javax.swing.GroupLayout(imagenPanel3);
         imagenPanel3.setLayout(imagenPanel3Layout);
         imagenPanel3Layout.setHorizontalGroup(
@@ -453,6 +456,10 @@ public class NoMorePassFrame extends javax.swing.JFrame {
         jPanel15.add(imagenPanel3);
 
         jButton6.setText(bundle.getString("enviar")); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${bean.cvsable}"), jButton6, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -666,11 +673,28 @@ public class NoMorePassFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        try {
+            bean.enviarCsv();
+
+            Thread t = new Thread(() -> {
+                try {
+                    bean.ping();
+                    bean.stop();
+                    refresh();
+                } catch (Exception ex) {
+                    Logger.getLogger(NoMorePassFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            t.start();
+            refresh();
+        } catch (Exception ex) {
+            Logger.getLogger(NoMorePassFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        bean.stop();
+        refresh();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

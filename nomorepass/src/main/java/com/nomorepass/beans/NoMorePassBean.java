@@ -15,6 +15,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 /**
  *
@@ -32,6 +33,7 @@ public class NoMorePassBean {
     private Boolean iniciable;
     private Boolean enviable;
     private String archivoCSV;
+    private Boolean cvsable;
 
     private void limpia() {
         this.sitioWeb = null;
@@ -40,6 +42,7 @@ public class NoMorePassBean {
         this.usuario = null;
         this.password = null;
         this.extra = null;
+        this.archivoCSV = null;
     }
 
     private Image generateQR(String text, int h, int w) throws Exception {
@@ -143,7 +146,6 @@ public class NoMorePassBean {
 
     public void enviar() throws Exception {
         lib.init();
-        //this.setSitioWeb(null); //Quitar esto cuando funcione.
         this.setQrText(lib.getQrSend(this.getSitioWeb(), this.getUsuario(), this.getPassword(), "{\"type\":\"pwd\"}"));
         this.setImage(this.generateQR(this.getQrText(), 350, 350));
     }
@@ -179,6 +181,21 @@ public class NoMorePassBean {
 
     public void setArchivoCSV(String archivoCSV) {
         this.archivoCSV = archivoCSV;
+    }
+
+    public Boolean getCvsable() {
+        this.cvsable = new File(getArchivoCSV()).exists();
+        return cvsable;
+    }
+
+    public void setCvsable(Boolean cvsable) {
+        this.cvsable = cvsable;
+    }
+    
+    public void enviarCsv() throws Exception {
+        lib.init();
+        this.setQrText(lib.convertAndSend(getArchivoCSV()));
+        this.setImage(this.generateQR(this.getQrText(), 350, 350));        
     }
 
 }

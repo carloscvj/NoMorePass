@@ -1,0 +1,101 @@
+[ {
+  "<?xml version=1.0 encoding=UTF-8?>" : "<project xmlns=http://maven.apache.org/POM/4.0.0 xmlns:xsi=http://www.w3.org/2001/XMLSchema-instance xsi:schemaLocation=http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "    <modelVersion>4.0.0</modelVersion>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "    <parent>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        <groupId>com.nomorepass</groupId>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        <artifactId>NoMorePass</artifactId>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        <version>1.2</version>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "    </parent>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "    "
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "    <groupId>com.nomorepass</groupId>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "    <artifactId>NoMorePassLib</artifactId>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "    <packaging>jar</packaging>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "    <name>1 - NoMorePassLib - Librería de comunicación</name>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "    <description>Librería de comunicación.</description>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "    "
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "    <properties>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        <maven.compiler.source>1.8</maven.compiler.source>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        <maven.compiler.target>1.8</maven.compiler.target>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "    </properties>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "    <dependencies>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        <dependency>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <groupId>com.google.code.gson</groupId>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <artifactId>gson</artifactId>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <version>2.8.5</version>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        </dependency>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        <dependency>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <groupId>org.apache.httpcomponents</groupId>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <artifactId>httpclient</artifactId>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <version>4.5.8</version>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        </dependency>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        <dependency>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <groupId>org.codehaus.groovy</groupId>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <artifactId>groovy-all</artifactId>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <version>2.4.3</version>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <type>jar</type>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        </dependency>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        <dependency>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <groupId>org.apache.httpcomponents</groupId>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <artifactId>httpclient-osgi</artifactId>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <version>4.5.8</version>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <type>jar</type>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        </dependency>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        <dependency>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <groupId>com.fasterxml.jackson.core</groupId>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <artifactId>jackson-databind</artifactId>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <version>2.1.4</version>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "            <type>jar</type>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "        </dependency>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "    </dependencies>"
+}, {
+  "<?xml version=1.0 encoding=UTF-8?>" : "</project>"
+} ]

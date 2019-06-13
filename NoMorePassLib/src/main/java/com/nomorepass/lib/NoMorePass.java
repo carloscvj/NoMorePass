@@ -65,8 +65,8 @@ public class NoMorePass {
 
             httppost.setEntity(entity);
 
-            System.out.println(httppost.toString());
-            System.out.println(EntityUtils.toString(httppost.getEntity()));
+            //System.out.println(httppost.toString());
+            //System.out.println(EntityUtils.toString(httppost.getEntity()));
             try (CloseableHttpResponse response = httpclient.execute(httppost)) {
                 HttpEntity resEntity = response.getEntity();
                 if (resEntity != null) {
@@ -333,7 +333,7 @@ public class NoMorePass {
     public String convertAndSend(String fileName) throws Exception {
         csvToJson(fileName);
         String json = getApiSendFile(fileName + ".json");
-        System.out.println(json);
+        //System.out.println(json);
         String resultado = recupera("resultado", json);
         if (resultado.equals("ok")) {
             this.token = recupera("token", json);
