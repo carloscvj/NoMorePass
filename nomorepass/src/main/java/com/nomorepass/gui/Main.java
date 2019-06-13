@@ -43,13 +43,12 @@ public class Main {
         File ficheroprop = new File(getTotalFileConfiguracion());
         if (ficheroprop.exists()) {
             misprop.load(new FileInputStream(ficheroprop));
-            //Logger.getLogger(ConfiguracionCBLAbs.class.getName()).log(Level.INFO, "configuracion de " + getBase() + " leidas desde:{0}", ficheroprop.getAbsolutePath());
         } else {
             ResourceBundle bunle = ResourceBundle.getBundle("configuracion");
             if (bunle != null) {
                 bunle.keySet().forEach((cada) -> {
                     misprop.setProperty(cada, bunle.getString(cada));
-                }); //Logger.getLogger(ConfiguracionCBLAbs.class.getName()).log(Level.INFO, "configuracion de " + getBase() + " leidas desde resource:{0}", "configuracion");
+                }); 
             }
         }
         return misprop;

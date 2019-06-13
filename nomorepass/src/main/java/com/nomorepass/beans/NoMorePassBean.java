@@ -31,6 +31,7 @@ public class NoMorePassBean {
     private String extra;
     private Boolean iniciable;
     private Boolean enviable;
+    private String archivoCSV;
 
     private void limpia() {
         this.sitioWeb = null;
@@ -161,12 +162,23 @@ public class NoMorePassBean {
     }
 
     public Boolean getEnviable() {
-        enviable = !((usuario==null||usuario.equals(""))&&(password==null||password.equals("")));
+        enviable = !((usuario == null || usuario.equals("")) && (password == null || password.equals("")));
         return enviable;
     }
 
     public void setEnviable(Boolean enviable) {
         this.enviable = enviable;
+    }
+
+    public String getArchivoCSV() {
+        if (archivoCSV == null) {
+            archivoCSV = "";
+        }
+        return archivoCSV.trim();
+    }
+
+    public void setArchivoCSV(String archivoCSV) {
+        this.archivoCSV = archivoCSV;
     }
 
 }
