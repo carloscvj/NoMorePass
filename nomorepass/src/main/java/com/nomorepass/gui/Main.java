@@ -48,7 +48,7 @@ public class Main {
             if (bunle != null) {
                 bunle.keySet().forEach((cada) -> {
                     misprop.setProperty(cada, bunle.getString(cada));
-                }); 
+                });
             }
         }
         return misprop;
@@ -67,7 +67,8 @@ public class Main {
         Point location = frm.getLocation();
         prop.setProperty("x", Integer.toString(location.x));
         prop.setProperty("y", Integer.toString(location.y));
-        guardarConfiguracion(prop);     
+        prop.setProperty("tabindex", Integer.toString(frm.getTabIndex()));
+        guardarConfiguracion(prop);
     }
 
     public static void main(String args[]) throws Exception {
@@ -78,9 +79,10 @@ public class Main {
         NoMorePassBean nmpb = new NoMorePassBean();
         nmpf.setBean(nmpb);
         nmpf.setIdiomaBean(ib);
-        String x = prop.getProperty("x","0");
-        String y = prop.getProperty("y","0");
-        nmpf.setLocation(Integer.parseInt(x),Integer.parseInt(y));
+        String x = prop.getProperty("x", "0");
+        String y = prop.getProperty("y", "0");
+        nmpf.setLocation(Integer.parseInt(x), Integer.parseInt(y));
+        nmpf.setTabIndex(Integer.parseInt(prop.getProperty("tabindex", "0")));
         nmpf.setVisible(true);
     }
 

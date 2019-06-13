@@ -83,6 +83,7 @@ public class NoMorePassFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -700,7 +701,7 @@ public class NoMorePassFrame extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         jFileChooser1.setSelectedFile(new File(bean.getArchivoCSV()));
         int que = jFileChooser1.showOpenDialog(this);
-        if(que==0) {
+        if (que == 0) {
             String name = jFileChooser1.getSelectedFile().getAbsolutePath();
             bean.setArchivoCSV(name);
             refresh();
@@ -792,6 +793,14 @@ public class NoMorePassFrame extends javax.swing.JFrame {
         });
 
         //
+    }
+
+    public int getTabIndex() {
+        return jTabbedPane1.getSelectedIndex();
+    }
+
+    public void setTabIndex(int i) {
+        jTabbedPane1.setSelectedIndex(i);
     }
 
 }
