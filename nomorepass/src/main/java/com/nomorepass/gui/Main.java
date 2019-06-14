@@ -44,7 +44,7 @@ public class Main {
         if (ficheroprop.exists()) {
             misprop.load(new FileInputStream(ficheroprop));
         } else {
-            ResourceBundle bunle = ResourceBundle.getBundle("configuracion");
+            ResourceBundle bunle = ResourceBundle.getBundle("NoMorePass");
             if (bunle != null) {
                 bunle.keySet().forEach((cada) -> {
                     misprop.setProperty(cada, bunle.getString(cada));
