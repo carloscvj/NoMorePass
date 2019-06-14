@@ -65,7 +65,7 @@ public class NoMorePass {
 
             httppost.setEntity(entity);
 
-            //System.out.println(httppost.toString());
+            //System.out.println("\nDIGO PASUBIR:"+httppost.toString());
             //System.out.println(EntityUtils.toString(httppost.getEntity()));
             try (CloseableHttpResponse response = httpclient.execute(httppost)) {
                 HttpEntity resEntity = response.getEntity();
@@ -75,6 +75,7 @@ public class NoMorePass {
                 EntityUtils.consume(resEntity);
             }
         }
+        //System.out.println("RESPONDE PASUBIR:"+ret+"\n");
         return ret;
     }
 
@@ -98,9 +99,9 @@ public class NoMorePass {
             }
 
         };
-        System.out.println("\nDIGO: " + httpPost + " " + nvps);
+        //System.out.println("\nDIGO: " + httpPost + " " + nvps);
         String responde = httpclient.execute(httpPost, responseHandler);
-        System.out.println("RESPONDE: " + responde + "\n");
+        //System.out.println("RESPONDE: " + responde + "\n");
         return responde;
     }
 
@@ -280,8 +281,8 @@ public class NoMorePass {
                 this.password = encriptar(pass, this.token);
                 this.extra = extra;
                 String json2 = getApiGrant();
-                System.out.println("Este es el token:" + this.token);
-                System.out.println("Este es el ticket:" + this.ticket);
+                //System.out.println("Este es el token:" + this.token);
+                //System.out.println("Este es el ticket:" + this.ticket);
                 return "nomorepass://SENDPASS" + this.token + this.ticket + site;
             }
         }
@@ -301,9 +302,9 @@ public class NoMorePass {
                     Logger.getLogger(NoMorePass.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                System.out.println("\n********************************************");
-                System.out.println("El dispositivo YA lo ha recogido");
-                System.out.println("********************************************\n");
+                //System.out.println("\n********************************************");
+                //System.out.println("El dispositivo YA lo ha recogido");
+                //System.out.println("********************************************\n");
                 break;
             }
         }
@@ -323,7 +324,6 @@ public class NoMorePass {
             for (int i = 0; i < fieldNames.size(); i++) {
                 if (fieldNames.get(i).equals("password")) {
                     String cod = encriptar(x.get(i), this.token);
-                    System.out.println(fieldNames.get(i) + ":" + x.get(i) + "," + cod);
                     obj.put(fieldNames.get(i), cod);
                 } else {
                     obj.put(fieldNames.get(i), x.get(i));
@@ -345,8 +345,8 @@ public class NoMorePass {
         String resultado = recupera("resultado", json);
         if (resultado.equals("ok")) {
             this.ticket = recupera("ticket", json);
-            System.out.println("Este es el token:" + this.token);
-            System.out.println("Este es el ticket:" + this.ticket);
+            //System.out.println("Este es el token:" + this.token);
+            //System.out.println("Este es el ticket:" + this.ticket);
             return "nomorepass://SENDFILE" + this.token + this.ticket;
         }
         return null;
