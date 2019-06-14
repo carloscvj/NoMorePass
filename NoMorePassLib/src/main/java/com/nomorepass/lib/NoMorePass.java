@@ -98,9 +98,9 @@ public class NoMorePass {
             }
 
         };
-        //System.out.println("\nDIGO: " + httpPost + " " + nvps);
+        System.out.println("\nDIGO: " + httpPost + " " + nvps);
         String responde = httpclient.execute(httpPost, responseHandler);
-        //System.out.println("RESPONDE: " + responde + "\n");
+        System.out.println("RESPONDE: " + responde + "\n");
         return responde;
     }
 
@@ -180,7 +180,6 @@ public class NoMorePass {
     }
 
     private String getApiSendFile(String nameFile) throws Exception {
-        this.token = nmp_newtoken();
         return subiendoUnFile("https://nomorepass.com/api/sendfile.php", nameFile);
     }
 
@@ -281,6 +280,8 @@ public class NoMorePass {
                 this.password = encriptar(pass, this.token);
                 this.extra = extra;
                 String json2 = getApiGrant();
+                System.out.println("Este es el token:" + this.token);
+                System.out.println("Este es el ticket:" + this.ticket);
                 return "nomorepass://SENDPASS" + this.token + this.ticket + site;
             }
         }
@@ -300,9 +301,9 @@ public class NoMorePass {
                     Logger.getLogger(NoMorePass.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                //System.out.println("\n********************************************");
-                //System.out.println("El dispositivo YA lo ha recogido");
-                //System.out.println("********************************************\n");
+                System.out.println("\n********************************************");
+                System.out.println("El dispositivo YA lo ha recogido");
+                System.out.println("********************************************\n");
                 break;
             }
         }
@@ -320,7 +321,13 @@ public class NoMorePass {
             List< String> x = csv.next();
             Map< String, String> obj = new LinkedHashMap<>();
             for (int i = 0; i < fieldNames.size(); i++) {
-                obj.put(fieldNames.get(i), x.get(i));
+                if (fieldNames.get(i).equals("password")) {
+                    String cod = encriptar(x.get(i), this.token);
+                    System.out.println(fieldNames.get(i) + ":" + x.get(i) + "," + cod);
+                    obj.put(fieldNames.get(i), cod);
+                } else {
+                    obj.put(fieldNames.get(i), x.get(i));
+                }
             }
             list.add(obj);
         }
@@ -331,13 +338,15 @@ public class NoMorePass {
     }
 
     public String convertAndSend(String fileName) throws Exception {
+        this.token = nmp_newtoken(); //Lo primero para poder encriptar las password en cvsToJson
         csvToJson(fileName);
         String json = getApiSendFile(fileName + ".json");
         //System.out.println(json);
         String resultado = recupera("resultado", json);
         if (resultado.equals("ok")) {
-            this.token = recupera("token", json);
             this.ticket = recupera("ticket", json);
+            System.out.println("Este es el token:" + this.token);
+            System.out.println("Este es el ticket:" + this.ticket);
             return "nomorepass://SENDFILE" + this.token + this.ticket;
         }
         return null;

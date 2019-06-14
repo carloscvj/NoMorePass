@@ -2,30 +2,30 @@
   "id" : "1",
   "sitio" : "sitio1",
   "usuario" : "usuario1",
-  "password" : "password1",
+  "password" : "U2FsdGVkX18BidX6Jde54feDc4//eMgCzaw1M4U689o=",
   "host" : "host1"
 }, {
   "id" : "2",
   "sitio" : "sitio2",
   "usuario" : "usuario2",
-  "password" : "password2",
+  "password" : "U2FsdGVkX1+lO7IPf8jNqXbkLjF9a81RYF7gTsUjM9Y=",
   "host" : "host2"
 }, {
   "id" : "3",
   "sitio" : "sitio3",
   "usuario" : "usuario3",
-  "password" : "password3",
+  "password" : "U2FsdGVkX19c93paN1no6EBqQskG5Q8klnZZMHDZaR4=",
   "host" : "host3"
 }, {
   "id" : "4",
   "sitio" : "sitio4",
   "usuario" : "usuario4",
-  "password" : "password4",
+  "password" : "U2FsdGVkX1/PoUpq4ROGhFr4evR1LoaoJQ1ffKNwf/o=",
   "host" : "host4"
 }, {
   "id" : "5",
   "sitio" : "sitio5",
   "usuario" : "usuario5",
-  "password" : "password5",
+  "password" : "U2FsdGVkX1+6G31RsTC2bdvbPP/j/yfJzBLTfNZcsS4=",
   "host" : "host5"
 } ]

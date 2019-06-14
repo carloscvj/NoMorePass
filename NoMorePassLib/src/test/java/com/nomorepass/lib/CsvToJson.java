@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pruebas.json;
+package com.nomorepass.lib;
 
 import com.nomorepass.lib.CSV;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,13 +37,19 @@ public class CsvToJson {
             List< String> x = csv.next();
             Map< String, String> obj = new LinkedHashMap<>();
             for (int i = 0; i < fieldNames.size(); i++) {
-                obj.put(fieldNames.get(i), x.get(i));
+                if (fieldNames.get(i).equals("password")) {
+                    String cod = OpenSslAes.encrypt("1BYZGBQZUGMCTK2RRPJ0", x.get(i));
+                    System.out.println(fieldNames.get(i) + ":" + x.get(i) + "," + cod);
+                    obj.put(fieldNames.get(i), cod);
+                } else {
+                    obj.put(fieldNames.get(i), x.get(i));
+                }
             }
             list.add(obj);
         }
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.writeValue(System.out, list);
+        //mapper.writeValue(System.out, list);
         OutputStream ou = new FileOutputStream(nameFile + ".json");
         mapper.writeValue(ou, list);
 
