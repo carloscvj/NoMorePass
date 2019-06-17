@@ -17,6 +17,6 @@
     <modules>
         <module>NoMorePassLib</module>
         <module>nomorepass</module>
-        <module>izpack</module>
+        <!--<module>izpack</module>-->
     </modules>
 </project>
