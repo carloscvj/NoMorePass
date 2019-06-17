@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+    COMO NO FUNCIONA EL PLUGIN SE PUEDE USAR...
+    cd /NetBeansProjects/java/NoMorePass/izpack
+    /home/becario/IzPack/bin/compile src/main/izpack/install.xml
 -->
 <installation version="5.0">
     <info>
@@ -41,7 +41,7 @@ and open the template in the editor.
     <packs>
         <pack name="ejecutables" required="yes">
             <description>El ejecutable y sus ficheros</description>
-            <file src="target/nomorepass-1.3-dkt.jar" targetdir="$INSTALL_PATH/bin"/>
+            <file src="../nomorepass/target/nomorepass-1.3-dkt.jar" targetdir="$INSTALL_PATH/bin"/>
             <!--<file src="nomorepass/src/main/java/resources/NoMorePass.properties" targetdir="$INSTALL_PATH/.config/nomorepass"/>-->
         </pack>
         
