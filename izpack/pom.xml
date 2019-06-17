@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.nomorepass</groupId>
+        <artifactId>NoMorePass</artifactId>
+        <version>1.3</version>
+    </parent>
+    <artifactId>izpack</artifactId>
+
+    <name>3 - izpack - Instalador</name>
+    <description>Crea un instalador install.jar</description>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <staging.dir>${project.build.directory}/staging</staging.dir>
+        <info.appName>My Killer Application</info.appName>
+        <info.appsubpath>my-killer-app/standard</info.appsubpath>
+        <izpack.dir.app>${basedir}/src/main/izpack</izpack.dir.app>
+        <staging.dir.app>${staging.dir}/appfiles</staging.dir.app>
+    </properties>
+   
+    <build>    
+        <plugins>          
+            <!-- Plugin de izpack para generar el instalador, configurado
+            para que lo genere en la fase de package -->
+            
+            <plugin>
+                <groupId>org.codehaus.izpack</groupId>
+                <artifactId>izpack-maven-plugin</artifactId>
+                <version>5.1.3</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <baseDir>${staging.dir.app}</baseDir>
+                    <installFile>${izpack.dir.app}/install.xml</installFile>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                    <finalName>${project.build.finalName}</finalName>
+                    <enableOverrideArtifact>true</enableOverrideArtifact>
+                    <mkdirs>true</mkdirs>
+                    <autoIncludeUrl>false</autoIncludeUrl>
+                    <autoIncludeDevelopers>false</autoIncludeDevelopers>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>izpack</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.izpack</groupId>
+                        <artifactId>izpack-standalone-compiler</artifactId>
+                        <version>4.3.4</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            
+        </plugins>
+    </build>
+    
+</project>
