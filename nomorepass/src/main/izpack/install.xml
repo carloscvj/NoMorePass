@@ -10,22 +10,34 @@ and open the template in the editor.
         <appversion>1.3-dkt</appversion>
         <url>http://www.nomorepass.com</url>
         <authors>
-            <author name="becario" email="becario@chuidiang.com"/>
+            <author name="becario" email="becario@becas.com"/>
         </authors>		
     </info>
 
-    <guiprefs resizable="yes" width="800" height="600"/>
+    <guiprefs width="800" height="600" resizable="no">
+        <splash>images/peas_load.gif</splash>
+        <laf name="substance">
+            <os family="windows" />
+            <os family="unix" />
+            <param name="variant" value="mist-silver" />
+        </laf>
+        <laf name="substance">
+            <os family="mac" />
+            <param name="variant" value="mist-aqua" />
+        </laf>
+        <modifier key="useHeadingPanel" value="yes" />
+    </guiprefs>
+
 
     <locale>
-        <langpack iso3="spa"/>
+        <langpack iso3="eng"/>
     </locale>
-    <panels>
-        <panel classname="HelloPanel"/>
-        <panel classname="PacksPanel"/>
-        <panel classname="TargetPanel"/>
-        <panel classname="InstallPanel"/>
-        <panel classname="FinishPanel"/>
-    </panels>
+  <panels>
+    <panel classname="TargetPanel"/>
+    <panel classname="PacksPanel"/>
+    <panel classname="InstallPanel"/>
+    <panel classname="FinishPanel"/>
+  </panels>
     <packs>
         <pack name="ejecutables" required="yes">
             <description>El ejecutable y sus ficheros</description>
